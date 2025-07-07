@@ -1,0 +1,9 @@
+﻿  main3.cpp
+E:\厦大\数据结构与算法\Lab6_3\Lab6_3\Lab6_3.h(14,11): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+  (编译源文件“main3.cpp”)
+  
+E:\厦大\数据结构与算法\Lab6_3\Lab6_3\Lab6_3.h(15,14): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+  (编译源文件“main3.cpp”)
+  
+E:\厦大\数据结构与算法\Lab6_3\Lab6_3\main3.cpp(6,12): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
+  Lab6_3.vcxproj -> E:\厦大\数据结构与算法\Lab6_3\x64\Debug\Lab6_3.exe

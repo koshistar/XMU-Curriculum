@@ -1,0 +1,8 @@
+﻿  main.cpp
+E:\厦大\数据结构与算法\Lab3-2\Lab3-2\Lab3-2.h(45,28): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
+  (编译源文件“main.cpp”)
+  
+E:\厦大\数据结构与算法\Lab3-2\Lab3-2\Lab3-2.h(46,26): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
+  (编译源文件“main.cpp”)
+  
+  Lab3-2.vcxproj -> E:\厦大\数据结构与算法\Lab3-2\x64\Debug\Lab3-2.exe

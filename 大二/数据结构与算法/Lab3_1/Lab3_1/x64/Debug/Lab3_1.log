@@ -1,0 +1,11 @@
+﻿  main.cpp
+E:\厦大\数据结构与算法\Lab3-1\Lab3-1\lab3_1.h(21,28): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
+  (编译源文件“../../Lab3-1/Lab3-1/main.cpp”)
+  
+E:\厦大\数据结构与算法\Lab3-1\Lab3-1\lab3_1.h(22,26): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
+  (编译源文件“../../Lab3-1/Lab3-1/main.cpp”)
+  
+E:\厦大\数据结构与算法\Lab3-1\Lab3-1\lab3_1.h(201,9): warning C4101: “i”: 未引用的局部变量
+  (编译源文件“../../Lab3-1/Lab3-1/main.cpp”)
+  
+  Lab3_1.vcxproj -> E:\厦大\数据结构与算法\Lab3_1\x64\Debug\Lab3_1.exe

@@ -1,0 +1,5 @@
+﻿  main2.cpp
+E:\厦大\数据结构与算法\Lab6-2\Lab6-2\Lab6_2.h(7,12): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
+  (编译源文件“main2.cpp”)
+  
+  Lab6-2.vcxproj -> E:\厦大\数据结构与算法\Lab6-2\x64\Debug\Lab6-2.exe

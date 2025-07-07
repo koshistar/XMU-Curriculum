@@ -1,0 +1,6 @@
+﻿  main.cpp
+E:\厦大\数据结构与算法\Lab7\Lab7\Map.h(342,13): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+  (编译源文件“main.cpp”)
+  
+E:\厦大\数据结构与算法\Lab7\Lab7\Map.h(59): warning C4715: “GetName”: 不是所有的控件路径都返回值
+  Lab7.vcxproj -> E:\厦大\数据结构与算法\Lab7\x64\Debug\Lab7.exe
