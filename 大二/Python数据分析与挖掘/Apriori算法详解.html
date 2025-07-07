@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Apriori算法详解与动画演示</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #3498db;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        .animation-area {
+            height: 400px;
+            border-radius: 8px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+            background-color: #f9f9f9;
+        }
+        .item {
+            position: absolute;
+            padding: 8px 12px;
+            border-radius: 20px;
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.5s ease;
+        }
+        .itemset {
+            position: absolute;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #2ecc71;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.5s ease;
+        }
+        .rule {
+            position: absolute;
+            padding: 8px;
+            border-radius: 8px;
+            background-color: #e74c3c;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.5s ease;
+        }
+        .control-panel {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .legend {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 15px;
+        }
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            margin-right: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .highlight {
+            background-color: #fffacd;
+        }
+        .algorithm-steps {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .step {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .step:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #3498db;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Apriori算法详解与动画演示</h1>
+        
+        <h2>一、算法原理</h2>
+        <p>Apriori算法是关联规则挖掘中最经典的算法之一，用于发现数据集中频繁出现的项集以及项集之间的关联规则。它由Agrawal和Srikant于1994年提出。</p>
+        
+        <h3>核心概念</h3>
+        <p><strong>项集(Itemset)</strong>：一个或多个项的集合，如{牛奶,面包}</p>
+        <p><strong>支持度(Support)</strong>：项集在所有事务中出现的频率</p>
+        <p>Support(X) = 包含X的事务数 / 总事务数</p>
+        <p><strong>置信度(Confidence)</strong>：规则X→Y的置信度表示在包含X的事务中同时包含Y的概率</p>
+        <p>Confidence(X→Y) = Support(X∩Y) / Support(X)</p>
+        
+        <h3>Apriori性质</h3>
+        <p>算法基于两个重要性质：</p>
+        <ul>
+            <li><strong>Apriori性质</strong>：如果一个项集是频繁的，那么它的所有子集也一定是频繁的</li>
+            <li><strong>反单调性</strong>：如果一个项集不是频繁的，那么它的所有超集也一定不是频繁的，可以抛弃（剪枝）</li>
+        </ul>
+        
+        <h2>二、算法步骤</h2>
+        <div class="algorithm-steps">
+            <div class="step"><strong>连接步骤</strong>：通过频繁(k-1)-项集生成候选k-项集</div>
+            <div class="step"><strong>剪枝步骤</strong>：利用Apriori性质剪枝掉不满足最小支持度的候选</div>
+            <div class="step"><strong>支持度计数</strong>：扫描数据库，计算每个候选的支持度</div>
+            <div class="step"><strong>规则生成</strong>：从频繁项集中生成关联规则并计算置信度</div>
+        </div>
+        
+        <h2>三、示例演示</h2>
+        <p>使用以下事务数据库进行演示（最小支持度=0.4）：</p>
+        <table>
+            <tr>
+                <th>事务ID</th>
+                <th>购买商品</th>
+            </tr>
+            <tr>
+                <td>T1</td>
+                <td>面包, 牛奶</td>
+            </tr>
+            <tr>
+                <td>T2</td>
+                <td>面包, 尿布, 啤酒, 鸡蛋</td>
+            </tr>
+            <tr>
+                <td>T3</td>
+                <td>牛奶, 尿布, 啤酒, 可乐</td>
+            </tr>
+            <tr>
+                <td>T4</td>
+                <td>面包, 牛奶, 尿布, 啤酒</td>
+            </tr>
+            <tr>
+                <td>T5</td>
+                <td>面包, 牛奶, 尿布, 可乐</td>
+            </tr>
+        </table>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #3498db;"></div>
+                <span>单项</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #2ecc71;"></div>
+                <span>项集</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #e74c3c;"></div>
+                <span>关联规则</span>
+            </div>
+        </div>
+        
+        <div class="control-panel">
+            <button id="step1">1. 生成1-项集</button>
+            <button id="step2">2. 筛选频繁1-项集</button>
+            <button id="step3">3. 生成候选2-项集</button>
+            <button id="step4">4. 筛选频繁2-项集</button>
+            <button id="step5">5. 生成关联规则</button>
+            <button id="reset">重置演示</button>
+        </div>
+        
+        <div class="animation-area" id="animationArea"></div>
+        
+        <h2>四、算法分析</h2>
+        <p><strong>优点</strong>：</p>
+        <ul>
+            <li>易于理解和实现</li>
+            <li>利用Apriori性质有效减少搜索空间</li>
+        </ul>
+        
+        <p><strong>缺点</strong>：</p>
+        <ul>
+            <li>需要多次扫描数据库</li>
+            <li>当候选项集很大时效率较低</li>
+        </ul>
+    </div>
+
+    <script>
+        const animationArea = document.getElementById('animationArea');
+        const step1Btn = document.getElementById('step1');
+        const step2Btn = document.getElementById('step2');
+        const step3Btn = document.getElementById('step3');
+        const step4Btn = document.getElementById('step4');
+        const step5Btn = document.getElementById('step5');
+        const resetBtn = document.getElementById('reset');
+        
+        const items = ['面包', '牛奶', '尿布', '啤酒', '鸡蛋', '可乐'];
+        const minSupport = 0.4;
+        
+        let currentStep = 0;
+        
+        function resetAnimation() {
+            animationArea.innerHTML = '';
+            currentStep = 0;
+        }
+        
+        function createItem(item, x, y) {
+            const elem = document.createElement('div');
+            elem.className = 'item';
+            elem.textContent = item;
+            elem.style.left = x + 'px';
+            elem.style.top = y + 'px';
+            animationArea.appendChild(elem);
+            return elem;
+        }
+        
+        function createItemset(items, x, y) {
+            const elem = document.createElement('div');
+            elem.className = 'itemset';
+            elem.textContent = `{${items.join(', ')}}`;
+            elem.style.left = x + 'px';
+            elem.style.top = y + 'px';
+            animationArea.appendChild(elem);
+            return elem;
+        }
+        
+        function createRule(rule, x, y) {
+            const elem = document.createElement('div');
+            elem.className = 'rule';
+            elem.textContent = rule;
+            elem.style.left = x + 'px';
+            elem.style.top = y + 'px';
+            animationArea.appendChild(elem);
+            return elem;
+        }
+        
+        function step1Generate1Itemsets() {
+            resetAnimation();
+            currentStep = 1;
+            
+            // 创建6个单项
+            const positions = [
+                {x: 50, y: 50},
+                {x: 200, y: 50},
+                {x: 350, y: 50},
+                {x: 500, y: 50},
+                {x: 200, y: 150},
+                {x: 350, y: 150}
+            ];
+            
+            items.forEach((item, index) => {
+                createItem(item, positions[index].x, positions[index].y);
+            });
+        }
+        
+        function step2FilterFrequent1Itemsets() {
+            if (currentStep !== 1) return;
+            currentStep = 2;
+            
+            // 鸡蛋的支持度为1/5=0.2 < 0.4，可乐的支持度为2/5=0.4 >= 0.4
+            // 所以移除鸡蛋
+            setTimeout(() => {
+                const allItems = document.querySelectorAll('.item');
+                allItems.forEach(item => {
+                    if (item.textContent === '鸡蛋') {
+                        item.style.transform = 'scale(0)';
+                        setTimeout(() => item.remove(), 500);
+                    }
+                });
+            }, 500);
+        }
+        
+        function step3GenerateCandidate2Itemsets() {
+            if (currentStep !== 2) return;
+            currentStep = 3;
+            
+            // 频繁1-项集: 面包,牛奶,尿布,啤酒,可乐
+            const frequentItems = ['面包', '牛奶', '尿布', '啤酒', '可乐'];
+            const candidatePairs = [];
+            
+            // 生成所有可能的2-项集组合
+            for (let i = 0; i < frequentItems.length; i++) {
+                for (let j = i+1; j < frequentItems.length; j++) {
+                    candidatePairs.push([frequentItems[i], frequentItems[j]]);
+                }
+            }
+            
+            // 在动画区域下方显示候选2-项集
+            setTimeout(() => {
+                const positions = [
+                    {x: 50, y: 250},
+                    {x: 150, y: 250},
+                    {x: 250, y: 250},
+                    {x: 350, y: 250},
+                    {x: 450, y: 250},
+                    {x: 50, y: 320},
+                    {x: 150, y: 320},
+                    {x: 250, y: 320},
+                    {x: 350, y: 320},
+                    {x: 450, y: 320}
+                ];
+                
+                candidatePairs.forEach((pair, index) => {
+                    createItemset(pair, positions[index].x, positions[index].y);
+                });
+            }, 500);
+        }
+        
+        function step4FilterFrequent2Itemsets() {
+            if (currentStep !== 3) return;
+            currentStep = 4;
+            
+            // 频繁2-项集: {面包,牛奶}, {面包,尿布}, {牛奶,尿布}, {尿布,啤酒}
+            const frequentPairs = [
+                ['面包', '牛奶'],
+                ['面包', '尿布'],
+                ['牛奶', '尿布'],
+                ['尿布', '啤酒']
+            ];
+            
+            setTimeout(() => {
+                const allItemsets = document.querySelectorAll('.itemset');
+                
+                allItemsets.forEach(itemset => {
+                    const items = itemset.textContent.replace('{', '').replace('}', '').split(', ');
+                    let isFrequent = false;
+                    
+                    for (const pair of frequentPairs) {
+                        if ((pair[0] === items[0] && pair[1] === items[1]) || 
+                            (pair[0] === items[1] && pair[1] === items[0])) {
+                            isFrequent = true;
+                            break;
+                        }
+                    }
+                    
+                    if (!isFrequent) {
+                        itemset.style.transform = 'scale(0)';
+                        setTimeout(() => itemset.remove(), 500);
+                    }
+                });
+            }, 500);
+        }
+        
+        function step5GenerateAssociationRules() {
+            if (currentStep !== 4) return;
+            currentStep = 5;
+            
+            // 从频繁2-项集中生成关联规则
+            const rules = [
+                '面包 → 牛奶',
+                '牛奶 → 面包',
+                '面包 → 尿布',
+                '尿布 → 面包',
+                '牛奶 → 尿布',
+                '尿布 → 牛奶',
+                '尿布 → 啤酒',
+                '啤酒 → 尿布'
+            ];
+            
+            setTimeout(() => {
+                const positions = [
+                    {x: 50, y: 100},
+                    {x: 150, y: 100},
+                    {x: 250, y: 100},
+                    {x: 350, y: 100},
+                    {x: 450, y: 100},
+                    {x: 50, y: 180},
+                    {x: 150, y: 180},
+                    {x: 250, y: 180}
+                ];
+                
+                rules.forEach((rule, index) => {
+                    createRule(rule, positions[index].x, positions[index].y);
+                });
+            }, 500);
+        }
+        
+        step1Btn.addEventListener('click', step1Generate1Itemsets);
+        step2Btn.addEventListener('click', step2FilterFrequent1Itemsets);
+        step3Btn.addEventListener('click', step3GenerateCandidate2Itemsets);
+        step4Btn.addEventListener('click', step4FilterFrequent2Itemsets);
+        step5Btn.addEventListener('click', step5GenerateAssociationRules);
+        resetBtn.addEventListener('click', resetAnimation);
+        
+        // 初始状态
+        resetAnimation();
+    </script>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Apriori算法动画演示（含提升度）</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .step {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .step-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .highlight {
+            background-color: #ffeb3b;
+        }
+        .frequent {
+            background-color: #a5d6a7;
+        }
+        .button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        .formula {
+            font-family: monospace;
+            background-color: #f0f0f0;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        .explanation {
+            font-style: italic;
+            color: #555;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Apriori算法动画演示（含提升度）</h1>
+    <p>最小支持度: 0.4 (4次), 最小置信度: 50%</p>
+    
+    <div class="container">
+        <div class="step" id="step1">
+            <div class="step-title">步骤1: 原始事务数据</div>
+            <table>
+                <tr><th>购物篮编号</th><th>购买商品列表</th></tr>
+                <tr><td>1</td><td>牛奶, 面包</td></tr>
+                <tr><td>2</td><td>牛奶, 面包</td></tr>
+                <tr><td>3</td><td>牛奶, 面包</td></tr>
+                <tr><td>4</td><td>牛奶, 黄油</td></tr>
+                <tr><td>5</td><td>牛奶, 面包</td></tr>
+                <tr><td>6</td><td>牛奶, 黄油</td></tr>
+                <tr><td>7</td><td>黄油</td></tr>
+                <tr><td>8</td><td>面包</td></tr>
+                <tr><td>9</td><td>手机</td></tr>
+                <tr><td>10</td><td>手机</td></tr>
+            </table>
+        </div>
+        
+        <div class="step" id="step2">
+            <div class="step-title">步骤2: 计算1-项集支持度</div>
+            <table>
+                <tr><th>项集</th><th>支持度计数</th><th>支持度</th><th>是否频繁</th></tr>
+                <tr><td>{牛奶}</td><td>6</td><td>0.6</td><td class="frequent">是 (≥0.4)</td></tr>
+                <tr><td>{面包}</td><td>5</td><td>0.5</td><td class="frequent">是 (≥0.4)</td></tr>
+                <tr><td>{黄油}</td><td>3</td><td>0.3</td><td>否 (<0.4)</td></tr>
+                <tr><td>{手机}</td><td>2</td><td>0.2</td><td>否 (<0.4)</td></tr>
+            </table>
+            <p>频繁1-项集: {牛奶}, {面包}</p>
+        </div>
+        
+        <div class="step" id="step3">
+            <div class="step-title">步骤3: 生成候选2-项集</div>
+            <p>连接频繁1-项集生成候选2-项集:</p>
+            <table>
+                <tr><th>候选2-项集</th></tr>
+                <tr><td>{牛奶, 面包}</td></tr>
+            </table>
+        </div>
+        
+        <div class="step" id="step4">
+            <div class="step-title">步骤4: 计算2-项集支持度</div>
+            <table>
+                <tr><th>项集</th><th>支持度计数</th><th>支持度</th><th>是否频繁</th></tr>
+                <tr><td>{牛奶, 面包}</td><td>4</td><td>0.4</td><td class="frequent">是 (≥0.4)</td></tr>
+            </table>
+            <p>频繁2-项集: {牛奶, 面包}</p>
+        </div>
+        
+        <div class="step" id="step5">
+            <div class="step-title">步骤5: 生成关联规则并计算提升度</div>
+            <p>从频繁项集{牛奶, 面包}生成关联规则:</p>
+            <p>提升度公式: <span class="formula">Lift(A → B) = P(B|A)/P(B) = P(A∩B)/(P(A)×P(B))</span></p>
+            
+            <table>
+                <tr><th>规则</th><th>置信度</th><th>提升度</th><th>是否强规则</th><th>解释</th></tr>
+                <tr>
+                    <td>牛奶 → 面包</td>
+                    <td>4/6 ≈ 66.67%</td>
+                    <td>0.4/(0.6×0.5) ≈ 1.33</td>
+                    <td class="frequent">是 (置信度≥50%)</td>
+                    <td>提升度>1，正相关</td>
+                </tr>
+                <tr>
+                    <td>面包 → 牛奶</td>
+                    <td>4/5 = 80%</td>
+                    <td>0.4/(0.5×0.6) ≈ 1.33</td>
+                    <td class="frequent">是 (置信度≥50%)</td>
+                    <td>提升度>1，正相关</td>
+                </tr>
+            </table>
+            
+            <div class="explanation">
+                <p><strong>提升度解释：</strong></p>
+                <ul>
+                    <li>提升度 = 1：A和B独立</li>
+                    <li>提升度 > 1：A和B正相关，一起出现比随机出现更频繁</li>
+                    <li>提升度 < 1：A和B负相关，一起出现比随机出现更少</li>
+                </ul>
+                <p>在我们的例子中，两条规则的提升度都是1.33，说明牛奶和面包之间存在正相关关系。</p>
+            </div>
+        </div>
+        
+        <div class="step" id="step6">
+            <div class="step-title">步骤6: 最终结果</div>
+            <p>所有频繁项集:</p>
+            <ul>
+                <li>1-项集: {牛奶}, {面包}</li>
+                <li>2-项集: {牛奶, 面包}</li>
+            </ul>
+            <p>强关联规则:</p>
+            <ul>
+                <li>牛奶 → 面包 (支持度: 0.4, 置信度: 66.67%, 提升度: 1.33)</li>
+                <li>面包 → 牛奶 (支持度: 0.4, 置信度: 80%, 提升度: 1.33)</li>
+            </ul>
+            <p><strong>业务解释：</strong>牛奶和面包之间存在正相关关系（提升度1.33），购买其中一种商品的顾客更可能购买另一种商品。可以考虑将这些商品放在相邻位置或进行捆绑促销。</p>
+        </div>
+    </div>
+    
+    <button class="button" onclick="animateSteps()">开始动画演示</button>
+    
+    <script>
+        function animateSteps() {
+            const steps = document.querySelectorAll('.step');
+            
+            // 重置所有步骤样式
+            steps.forEach(step => {
+                step.style.opacity = '0.5';
+                step.style.transition = 'none';
+            });
+            
+            // 依次高亮显示每个步骤
+            steps.forEach((step, index) => {
+                setTimeout(() => {
+                    step.style.transition = 'opacity 0.5s ease-in-out';
+                    step.style.opacity = '1';
+                    step.style.border = '2px solid #4CAF50';
+                    
+                    // 移除前一步的高亮边框
+                    if (index > 0) {
+                        steps[index-1].style.border = '1px solid #ddd';
+                    }
+                    
+                    // 滚动到当前步骤
+                    step.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+                }, index * 1500);
+            });
+        }
+    </script>
+</body>
+</html>
