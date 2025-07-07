@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutX="48.0" layoutY="46.0" prefHeight="82.0" prefWidth="100.0">
+         <children>
+            <RadioButton mnemonicParsing="false" selected="true" text="High" translateX="10.0">
+               <toggleGroup>
+                  <ToggleGroup fx:id="level" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton mnemonicParsing="false" text="Medium" toggleGroup="$level" translateX="10.0" translateY="10.0" />
+            <RadioButton mnemonicParsing="false" text="Low" toggleGroup="$level" translateX="10.0" translateY="20.0" />
+         </children>
+      </VBox>
+      <TextField layoutX="165.0" layoutY="46.0" prefHeight="30.0" prefWidth="100.0" promptText="Your name" />
+      <TextField layoutX="165.0" layoutY="87.0" prefHeight="30.0" prefWidth="100.0" promptText="Your passward" />
+      <SplitMenuButton layoutX="271.0" layoutY="128.0" mnemonicParsing="false" text="English">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Chinese" />
+          <MenuItem mnemonicParsing="false" text="Japanese" />
+        </items>
+      </SplitMenuButton>
+      <Button layoutX="48.0" layoutY="170.0" mnemonicParsing="false" text="Accept" />
+      <Button layoutX="145.0" layoutY="170.0" mnemonicParsing="false" text="Decline" />
+      <CheckBox layoutX="46.0" layoutY="229.0" mnemonicParsing="false" text="Normal" />
+      <CheckBox layoutX="182.0" layoutY="229.0" mnemonicParsing="false" selected="true" text="Checked" />
+      <CheckBox indeterminate="true" layoutX="302.0" layoutY="229.0" mnemonicParsing="false" text="Undefined" />
+      <Slider layoutX="157.0" layoutY="287.0" />
+      <ProgressIndicator layoutX="324.0" layoutY="279.0" progress="0.0" />
+      <Line endX="-200.0" endY="60.0" layoutX="351.0" layoutY="200.0" startX="-200.0" startY="30.0" strokeDashOffset="20.25" strokeMiterLimit="100.0" style="-fx-stroke-dash-array: 1 2;">
+         <cursor>
+            <Cursor fx:constant="H_RESIZE" />
+         </cursor>
+      </Line>
+      <Label layoutX="249.0" layoutY="174.0" style="-fx-border-style: dashed;" text="Not available" />
+      <Label layoutX="53.0" layoutY="276.0" style="-fx-border-style: dashed;" text="Progress:" />
+   </children>
+</Pane>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab10_4.HelloController">
+   <children>
+      <VBox>
+         <children>
+            <HBox>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#showInformationDialogueBox" text="信息对话框" />
+                  <Button mnemonicParsing="false" onAction="#showWarningDialogueBox" text="警告对话框" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+            <HBox>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#showErrorDialogueBox" text="错误对话框" />
+                  <Button mnemonicParsing="false" onAction="#showConformationDialogueBox" text="确认对话框" />
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <Button mnemonicParsing="false" onAction="#showInputDialogueBox" text="输入对话框" />
+                  <Button mnemonicParsing="false" onAction="#showChoiceDialogueBox" text="选择对话框" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</Pane>

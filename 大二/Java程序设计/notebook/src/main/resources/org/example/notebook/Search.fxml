@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.notebook.SearchController">
+   <children>
+      <TextField fx:id="searchTextField" layoutX="27.0" layoutY="14.0" prefHeight="30.0" prefWidth="270.0" promptText="查找" />
+      <TextField fx:id="replaceTextField" layoutX="27.0" layoutY="62.0" prefHeight="30.0" prefWidth="270.0" promptText="替换" />
+      <Button fx:id="replaceButton" layoutX="312.0" layoutY="62.0" mnemonicParsing="false" onAction="#onReplace" prefHeight="30.0" prefWidth="100.0" text="替换" />
+      <Button fx:id="replaceAllButton" layoutX="422.0" layoutY="62.0" mnemonicParsing="false" onAction="#onReplaceAll" prefHeight="30.0" prefWidth="100.0" text="全部替换" />
+      <Button fx:id="searchButton" layoutX="312.0" layoutY="14.0" mnemonicParsing="false" onAction="#onSearch" prefHeight="30.0" prefWidth="100.0" text="查找下一个" />
+      <Button fx:id="previousSearchButton" layoutX="422.0" layoutY="14.0" mnemonicParsing="false" onAction="#onPreviousSearch" prefHeight="30.0" prefWidth="100.0" text="查找上一个" />
+      <CheckBox fx:id="ignoreCheckBox" layoutX="421.0" layoutY="104.0" mnemonicParsing="false" text="区分大小写" />
+   </children>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
+</Pane>

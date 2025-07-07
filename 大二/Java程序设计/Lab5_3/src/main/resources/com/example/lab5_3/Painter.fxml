@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane hgap="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" vgap="8.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab5_3.PainterController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+<children>
+      <VBox maxHeight="1.7976931348623157E308" spacing="8.0">
+<children>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="51.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="167.0" minWidth="10.0" prefWidth="88.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.0" minWidth="10.0" prefWidth="43.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="314.0" minWidth="10.0" prefWidth="96.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label prefHeight="20.0" prefWidth="35.0" text="Red" />
+                  <Label layoutX="10.0" layoutY="14.0" text="Green" GridPane.rowIndex="1" />
+                  <Label layoutX="10.0" layoutY="14.0" text="Blue" GridPane.rowIndex="2" />
+                  <Label layoutX="10.0" layoutY="70.0" text="Alpha" GridPane.rowIndex="3" />
+                  <Slider fx:id="redSlider" max="255.0" GridPane.columnIndex="1" />
+                  <Slider fx:id="greenSlider" layoutX="59.0" layoutY="15.0" max="255.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Slider fx:id="blueSlider" layoutX="59.0" layoutY="43.0" max="255.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Slider fx:id="alphaSlider" blockIncrement="0.1" layoutX="59.0" layoutY="71.0" max="1.0" value="1.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="redTextField" text="0" GridPane.columnIndex="2" />
+                  <TextField fx:id="greenTextField" layoutX="145.0" layoutY="9.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <TextField fx:id="blueTextField" layoutX="145.0" layoutY="37.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <TextField fx:id="alphaTextField" layoutX="145.0" layoutY="65.0" text="1.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <Circle fill="DODGERBLUE" radius="47.0" stroke="DODGERBLUE" strokeType="INSIDE" GridPane.columnIndex="3" GridPane.rowSpan="2147483647" />
+                  <Rectangle fx:id="colorRectangle" arcHeight="5.0" arcWidth="5.0" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" GridPane.columnIndex="3" GridPane.rowSpan="2147483647" />
+               </children>
+            </GridPane>
+            <TitledPane animated="false" text="Pen Size" xmlns:fx="http://javafx.com/fxml">
+<content>
+                  <VBox spacing="8.0">
+<children>
+                        <RadioButton fx:id="smallRadioButton" layoutX="166.0" layoutY="325.5" mnemonicParsing="false" onAction="#sizeRadioButtonSelected" text="Small">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="sizeToggleGroup" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="mediumRadioButton" layoutX="166.0" layoutY="340.5" mnemonicParsing="false" onAction="#sizeRadioButtonSelected" selected="true" text="Medium" toggleGroup="$sizeToggleGroup" />
+                        <RadioButton fx:id="largeRadioButton" layoutX="166.0" layoutY="355.5" mnemonicParsing="false" onAction="#sizeRadioButtonSelected" text="Large" toggleGroup="$sizeToggleGroup" />
+</children>
+                  </VBox>
+</content>
+</TitledPane>
+            <TitledPane animated="false" text="Shape">
+               <content>
+                  <VBox spacing="8.0">
+                     <children>
+                        <RadioButton fx:id="circleRadioButton" layoutX="166.0" layoutY="325.5" mnemonicParsing="false" onAction="#shapeRadioButtonSelected" selected="true" text="Circle">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="shapeToggleGroup" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="rectangleRadioButton" layoutX="166.0" layoutY="340.5" mnemonicParsing="false" onAction="#shapeRadioButtonSelected" text="Rectangle" toggleGroup="$shapeToggleGroup" />
+                        <RadioButton fx:id="lineRadioButton" layoutX="166.0" layoutY="355.5" mnemonicParsing="false" onAction="#shapeRadioButtonSelected" text="Line" toggleGroup="$shapeToggleGroup" />
+                     </children>
+                  </VBox>
+               </content>
+            </TitledPane>
+            <Button fx:id="undoButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#undoButtonPressed" text="Undo" />
+            <Button fx:id="clearButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#clearButtonPressed" text="Clear" />
+</children>
+      </VBox>
+      <AnchorPane fx:id="drawingAreaAnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseDragged="#drawingAreaMouseDragged" onMousePressed="#drawingAreaMousePressed" style="-fx-background-color: white;" GridPane.columnIndex="1" />
+</children>
+<padding>
+<Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+</padding>
+</GridPane>

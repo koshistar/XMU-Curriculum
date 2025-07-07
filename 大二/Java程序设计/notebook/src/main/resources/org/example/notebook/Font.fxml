@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.notebook.FontController">
+   <children>
+      <ListView fx:id="fontListView" layoutX="14.0" layoutY="77.0" prefHeight="220.0" prefWidth="166.0" />
+      <ListView fx:id="glyphListView" layoutX="217.0" layoutY="77.0" prefHeight="220.0" prefWidth="166.0" />
+      <ListView fx:id="sizeListView" layoutX="414.0" layoutY="77.0" prefHeight="220.0" prefWidth="166.0" />
+      <Label layoutX="14.0" layoutY="57.0" text="字体" />
+      <Label layoutX="217.0" layoutY="57.0" text="字形" />
+      <Label layoutX="414.0" layoutY="57.0" text="大小" />
+      <Label layoutX="285.0" layoutY="306.0" text="示例" />
+      <TextArea fx:id="fontShowTextArea" layoutX="200.0" layoutY="326.0" prefHeight="61.0" prefWidth="200.0" />
+      <Button fx:id="fontInterfaceConfirmButton" layoutX="530.0" layoutY="316.0" mnemonicParsing="false" onAction="#onFontInterfaceConfirm" style="-fx-background-color: blue;" text="确认" textFill="#fff3f3" />
+      <Button fx:id="fontInterfaceCancelButton" layoutX="530.0" layoutY="361.0" mnemonicParsing="false" onAction="#onFontInterfaceCancel" text="取消" />
+      <TextField fx:id="fontTextField" layoutX="44.0" layoutY="42.0" prefHeight="30.0" prefWidth="135.0" />
+      <TextField fx:id="glyphTextField" layoutX="248.0" layoutY="42.0" prefHeight="30.0" prefWidth="135.0" />
+      <TextField fx:id="sizeTextField" layoutX="444.0" layoutY="42.0" prefHeight="30.0" prefWidth="135.0" />
+   </children>
+</Pane>

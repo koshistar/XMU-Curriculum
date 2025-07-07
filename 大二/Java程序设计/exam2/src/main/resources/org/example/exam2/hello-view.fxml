@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.exam2.HelloController">
+   <children>
+      <HBox spacing="15.0">
+         <children>
+            <TextField fx:id="queryTextField" prefHeight="30.0" prefWidth="107.0" promptText="请输入姓名" />
+            <Button mnemonicParsing="false" onAction="#onQuery" prefHeight="30.0" text="查询" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="TOP_RIGHT" layoutX="339.0" spacing="15.0">
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+         <children>
+            <Button mnemonicParsing="false" onAction="#onNew" prefHeight="30.0" text="新增" />
+            <Button layoutX="15.0" layoutY="15.0" mnemonicParsing="false" onAction="#onSave" prefHeight="30.0" text="保存更新" />
+            <Button layoutX="80.0" layoutY="15.0" mnemonicParsing="false" onAction="#onOpen" prefHeight="30.0" text="打开文件..." />
+         </children>
+      </HBox>
+      <VBox alignment="CENTER" layoutX="76.0" layoutY="78.0" spacing="100.0" AnchorPane.rightAnchor="424.0">
+         <children>
+            <Label prefHeight="30.0" text="教工号：" />
+            <Label layoutX="10.0" layoutY="10.0" prefHeight="30.0" text="姓名：" />
+            <Label layoutX="10.0" layoutY="30.0" prefHeight="30.0" text="职称：" />
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="195.0" layoutY="78.0" spacing="100.0">
+         <children>
+            <TextField fx:id="numberTextField" onKeyReleased="#onTextModified" prefHeight="30.0" prefWidth="325.0" />
+            <TextField fx:id="nameTextField" layoutX="10.0" layoutY="10.0" onKeyReleased="#onTextModified" prefHeight="30.0" prefWidth="325.0" />
+            <TextField fx:id="occupationTextField" layoutX="10.0" layoutY="140.0" onKeyReleased="#onTextModified" prefHeight="30.0" prefWidth="325.0" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
