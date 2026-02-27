@@ -1,0 +1,13 @@
+如果在创建表的时候定义了外键约束，那么执行数据输入操作是有顺序的：先输入不依赖其它表的数据，示例顺序：
+1.regions
+2.counties
+3.locations
+4.warehouses
+5.product_categories
+6.products
+7.inventories
+8.customers
+9.contacts
+10.employees
+11.orders
+12.order_items
