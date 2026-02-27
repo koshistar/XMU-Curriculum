@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About - Simple HTTP Server</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 40px; background-color: #f5f5f5; }
+        .container { max-width: 700px; margin: 0 auto; background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        h1 { color: #333; border-bottom: 2px solid #4CAF50; padding-bottom: 10px; }
+        .highlight { background-color: #e8f5e9; padding: 15px; border-radius: 5px; margin: 20px 0; }
+        a { color: #2196F3; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        code { background-color: #f1f1f1; padding: 2px 6px; border-radius: 3px; font-family: Consolas, monospace; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>About This Server</h1>
+        <p>This is a simple HTTP server implemented in C specifically for Windows.</p>
+        <div class="highlight">
+            <h3>Key Features:</h3>
+            <ul>
+                <li>Handles HTTP/1.1 GET requests</li>
+                <li>Serves static files with proper MIME types</li>
+                <li>Error handling (404, 500, 403)</li>
+                <li>Windows-specific optimizations</li>
+                <li>No external dependencies</li>
+            </ul>
+        </div>
+        <h3>Technical Details</h3>
+        <p>This server uses the Winsock API for network communication and standard C library for file I/O.</p>
+        <h3>Building and Running</h3>
+        <p>Compile with:</p>
+        <code>cl http_server.c /Fe:http_server.exe ws2_32.lib</code>
+        <p>Or in Visual Studio: Link with <code>ws2_32.lib</code></p>
+        <p><a href="/">¡û Back to Home</a></p>
+    </div>
+</body>
+</html>

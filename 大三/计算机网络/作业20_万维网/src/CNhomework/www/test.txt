@@ -1,0 +1,9 @@
+This is a plain text file served by the Windows HTTP server.
+=============================================================
+
+Server Information:
+- Platform: Windows
+- Port: 8080
+- Protocol: HTTP/1.1
+
+You can use this server to serve any type of static content.
