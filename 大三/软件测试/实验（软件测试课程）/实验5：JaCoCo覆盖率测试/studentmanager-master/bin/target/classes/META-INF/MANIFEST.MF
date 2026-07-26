@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: lenovo
+Build-Jdk: 21.0.10
+Implementation-Title: studentmanager
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.wdd.studentmanager
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/studentmanager
+Created-By: Maven Integration for Eclipse
+

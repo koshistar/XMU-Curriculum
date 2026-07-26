@@ -1,0 +1,581 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0055)http://tech.it168.com/a2008/1230/261/000000261646.shtml -->
+<HTML lang=zh-CN xml:lang="zh-CN" 
+xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>Junit4测试 - 技术开发 | IT168</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<META http-equiv=content-language content=gb2312>
+<META content="" name=description>
+<META content="Junit4测试 - 技术开发| IT168" name=keywords><LINK media=screen 
+href="Junit4测试.files/tech-style.css" type=text/css rel=StyleSheet>
+<SCRIPT type=text/javascript>
+	var reqUrl = window.location.href.toLowerCase(); 
+	if (reqUrl.lastIndexOf("itpub.net")>0) 
+		document.domain='itpub.net';
+	else
+		document.domain='it168.com';
+</SCRIPT>
+
+<META content="MSHTML 6.00.2800.1619" name=GENERATOR></HEAD>
+<BODY>
+<DIV id=tl><!--ADV|顶通--><SPAN id=ADV_TOPTL></SPAN><!--ADV|顶通--><!--ADV|通栏-->
+<DIV id=ADV_TL>
+<DIV class=divad_clear></DIV></DIV><!--ADV|通栏--></DIV>
+<DIV id=header><A href="http://www.itpub.net/" target=_blank><IMG class=left 
+height=78 src="Junit4测试.files/logo.gif" width=148 border=0></A> 
+<DIV class=right>
+<UL class=logon>
+  <DIV id=LoginTrue style="DISPLAY: none">
+  <LI class=one>
+  <SCRIPT type=text/javascript>
+	            document.write('<scr'+'ipt type="text/javascript" src="http://sso.itpub.net/ti.js?url='+escape(top.document.URL)+'&ref='+escape(top.document.referrer)+'&print=yes"></scr'+'ipt>');
+              </SCRIPT>
+  </LI>
+  <LI class=two><A href="http://space.itpub.net/spacecp.php?docp=me">我的空间</A> 
+  </LI></DIV>
+  <DIV id=LoginFalse>
+  <LI class=one><A 
+  href="http://sso.itpub.net/Login?return_url=http://www.itpub.net/list.html">登录</A> 
+  </LI>
+  <LI class=two><A href="http://sso.itpub.net/Register">注册</A> </LI>
+  <LI class=three><A href="http://publish.itpub.net/">返回首页</A> </LI></DIV>
+  <DIV class=clear></DIV>
+  <DIV class=nav><A href="http://publish.itpub.net/" target=_blank>门户</A> | <A 
+  href="http://www.itpub.net/list.html" target=_blank>论坛</A> | <A 
+  href="http://space.itpub.net/" target=_blank>空间</A> | <A 
+  href="http://space.itpub.net/action-group/" target=_blank>圈子</A> | <A 
+  href="http://weblog.itpub.net/" target=_blank>Blog</A> | <A 
+  href="http://tech.it168.com/lists/0233/0/0233.shtml" target=_blank>新闻</A> | <A 
+  href="http://tech.it168.com/book.shtml" target=_blank>图书</A> | <A 
+  href="http://tech.it168.com/lists/0242/0/0242.shtml" target=_blank>文档</A> | <A 
+  href="http://download.itpub.net/" target=_blank>下载</A> | <A 
+  href="http://tech.it168.com/kb.shtml" target=_blank>搜索</A> | <A 
+  href="http://edu.itpub.net/" target=_blank>培训</A> | <A 
+  href="http://wiki.itpub.net/" target=_blank>WiKi</A> | <A 
+  href="http://www.ixpub.net/" target=_blank>IXPUB</A> | <A 
+  href="http://publish.itpub.net/tougao/" target=_blank>投稿</A> </DIV>
+  <DIV class=subNav>频道： <A href="http://tech.it168.com/lists/7227/0/7227.shtml" 
+  target=_blank>Oracle</A> | <A 
+  href="http://tech.it168.com/lists/7231/0/7231.shtml" target=_blank>DB2</A> | 
+  <A href="http://tech.it168.com/lists/7232/0/7232.shtml" target=_blank>SQL 
+  Server</A> | <A href="http://tech.it168.com/lists/7233/0/7233.shtml" 
+  target=_blank>ERP</A> | <A 
+  href="http://tech.it168.com/lists/7823/0/7823.shtml" target=_blank>Java</A> | 
+  <A href="http://tech.it168.com/lists/7824/0/7824.shtml" target=_blank>.NET</A> 
+  | <A href="http://tech.it168.com/lists/7825/0/7825.shtml" target=_blank>开源</A> 
+  | <A href="http://tech.it168.com/lists/7826/0/7826.shtml" target=_blank>移动</A> 
+  | <A href="http://tech.it168.com/lists/8047/0/8047.shtml" target=_blank>管理</A> 
+  | <A href="http://tech.it168.com/soa.shtml" target=_blank>SOA</A> | <A 
+  href="http://tech.it168.com/lists/7827/0/7827.shtml" target=_blank>测试</A> | <A 
+  href="http://tech.it168.com/lists/8340/0/8340.shtml" target=_blank>BI</A> | <A 
+  href="http://tech.it168.com/lists/8204/0/8204.shtml" target=_blank>SCM</A> 
+  </DIV></UL></DIV>
+<DIV class=clear></DIV></DIV>
+<SCRIPT language=javascript>
+	  function getElement(aID)
+		 {
+		    return (document.getElementById) ? document.getElementById(aID)
+										   : document.all[aID];
+		 }
+       if (typeof(sso_username)=="undefined")
+	      {		  
+			 getElement("LoginTrue").style.display="none";
+			 getElement("LoginFalse").style.display="block";
+		  }
+	   else
+		 {
+			  getElement("LoginFalse").style.display="none";
+			  getElement("LoginTrue").style.display="block";		  
+		  }
+    </SCRIPT>
+
+<DIV class=top02>
+<DIV class=dqwz>您的位置：<A href="http://www.it168.com/">首页</A> &gt; <A 
+href="http://tech.it168.com/">技术开发</A> &gt; 正文</DIV></DIV><!-- 内容开始 -->
+<DIV class=w_rim><!-- left -->
+<DIV class=l1><!--ADV|通栏-->
+<DIV id=ADV_BTTL>
+<DIV class=divad_clear></DIV></DIV><!--ADV|通栏-->
+<DIV class=w_c1>
+<DIV class=w_t1>
+<DIV class=w_c2>
+<DIV class="l2 f16">
+<H1>Junit4测试</H1></DIV>
+<DIV class="r2 top8">[<A 
+href="javascript:d=document;t=d.selection?(d.selection.type!='None'?d.selection.createRange().text:''):(d.getSelection?d.getSelection():'');void(keyit=window.open('http://www.365key.com/storeit.aspx?t='+escape(d.title)+'&amp;u='+escape(d.location.href)+'&amp;c='+escape(t),'keyit','scrollbars=no,width=475,height=575,left=75,top=20,status=no,resizable=yes'));keyit.focus();">收藏此页</A>] 
+[<A href="javascript:window.print();">打印</A>]</DIV></DIV>
+<DIV class=top11></DIV>
+<DIV class=w_c2>
+<DIV class=l2>作者：<B class=red>ITPUB论坛</B>&nbsp;&nbsp;2009-01-06 <B 
+id=AbortBBS></B></DIV>
+<DIV class=r2>
+<DIV><B>内容导航：</B></DIV><A class=sel id=Nav1 href="javascript:;">建立Math类 </A>
+<DIV class=pp>
+<DIV class=p id=Nav1Menu><A class=hov1 title="建立Math类 " 
+href="http://tech.it168.com/a2008/1230/261/000000261646.shtml">第1页：<SPAN> 
+建立Math类 </SPAN></A><A title=参数测试 
+href="http://tech.it168.com/a2008/1230/261/000000261646_1.shtml">第2页：<SPAN> 参数测试 
+</SPAN></A></DIV></DIV></DIV></DIV></DIV>
+<DIV class=w638><B>文本Tag: </B><A 
+href="http://tech.it168.com/lists/5992/0/5992.shtml" target=_blank>单元测试</A> 
+</DIV>
+<DIV class=memo>
+<P><B>【IT168 技术文章】</B></P>
+<P>　　近期写单元测试计划，公司准备把junit3.8升级到junit4以上的版本，所以研究了一下，写下学习过程和心得体会，为了巩固学习成果，所以把学习心得写下来加深印象，也供需要的朋友查阅，少走弯路。 
+<BR>　　好了，废话不多说，直接开始： <BR>　　假设我们要写一个整数除法和乘法的类，并且给他写测试用例：</P>
+<P>&nbsp;&nbsp;&nbsp; 1) 建立Math类 <BR>&nbsp;&nbsp;&nbsp; 工具是eclipse3.3 <BR>Java代码 
+<BR>&nbsp;/**&nbsp; <BR>&nbsp;* @author bulargy.j.bai&nbsp; <BR>&nbsp;* 
+@创建时间：Mar 10, 2008&nbsp; <BR>&nbsp;&nbsp; * @描述：一个整数除法和乘法的工具类&nbsp; 
+<BR>&nbsp;*/&nbsp; <BR>public class Math {&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp; 
+public static int divide(int x,int y) {&nbsp;&nbsp; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return x/y;&nbsp;&nbsp; 
+<BR>&nbsp;&nbsp;&nbsp; }&nbsp;&nbsp; <BR>&nbsp; <BR>&nbsp;&nbsp;&nbsp; public 
+static int multiple(int x,int y) {&nbsp;&nbsp; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return x*y;&nbsp;&nbsp; 
+<BR>&nbsp;&nbsp;&nbsp; }&nbsp;&nbsp; <BR>}&nbsp;</P>
+<P>/**<BR>&nbsp;* @author bulargy.j.bai<BR>&nbsp;* @创建时间：Mar 10, 2008<BR>&nbsp;* 
+@描述：一个整数除法和乘法的工具类<BR>&nbsp;*/<BR>public class Math {<BR>&nbsp;&nbsp;&nbsp; 
+public static int divide(int x,int y) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 
+x/y;<BR>&nbsp;&nbsp;&nbsp; }</P>
+<P>&nbsp;&nbsp;&nbsp; public static int multiple(int x,int y) 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 
+x*y;<BR>&nbsp;&nbsp;&nbsp; }<BR>}</P>
+<P>&nbsp;&nbsp;&nbsp; 2) 建立测试用例 <BR>　　选中需要建立测试用例的包，选择new-&gt;other-&gt;JUnit 
+Test Case。 <BR>　　有5个方法可以选择： <BR>　　setUp()方法在测试方法前调用，一般用来做测试准备工作。 
+<BR>　　tearDown()方法在测试方法后调用，一般作测试的清理工作。 
+<BR>　　setUpBeforeClass()方法在整个类初始化之后调用，一般用来做测试准备工作。 
+<BR>　　tearDownAfterClass()方法在整个类结束之前调用，一般作测试的清理工作。 
+<BR>　　constructor()为是否包含构造方法。</P>
+<P>　　自动生成的代码如下： <BR>Java代码 <BR>/**&nbsp; <BR>&nbsp;* @author bulargy.j.bai&nbsp; 
+<BR>&nbsp;* @创建时间：Mar 11, 2008&nbsp; <BR>&nbsp;* @描述：&nbsp; <BR>&nbsp;*/&nbsp; 
+<BR>public class MathTest {&nbsp;&nbsp; <BR>&nbsp; <BR>&nbsp;&nbsp;&nbsp; 
+@BeforeClass&nbsp; <BR>&nbsp;&nbsp;&nbsp; public static void setUpBeforeClass() 
+throws Exception {&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp; }&nbsp;&nbsp; <BR>&nbsp; 
+<BR>&nbsp;&nbsp;&nbsp; @AfterClass&nbsp; <BR>&nbsp;&nbsp;&nbsp; public static 
+void tearDownAfterClass() throws Exception {&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp; 
+}&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp; 
+@Test&nbsp; <BR>&nbsp;&nbsp;&nbsp; public void testDivide() {&nbsp;&nbsp; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fail("Not yet 
+implemented");&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp; }&nbsp;&nbsp; <BR>&nbsp; 
+<BR>&nbsp;&nbsp;&nbsp; @Test&nbsp; <BR>&nbsp;&nbsp;&nbsp; public void 
+testMultiple() {&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+fail("Not yet implemented");&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp; }&nbsp;&nbsp; 
+<BR>}&nbsp;</P>
+<P>/**<BR>&nbsp;* @author bulargy.j.bai<BR>&nbsp;* @创建时间：Mar 11, 2008<BR>&nbsp;* 
+@描述：<BR>&nbsp;*/<BR>public class MathTest {</P>
+<P>&nbsp;&nbsp;&nbsp; @BeforeClass<BR>&nbsp;&nbsp;&nbsp; public static void 
+setUpBeforeClass() throws Exception {<BR>&nbsp;&nbsp;&nbsp; }</P>
+<P>&nbsp;&nbsp;&nbsp; @AfterClass<BR>&nbsp;&nbsp;&nbsp; public static void 
+tearDownAfterClass() throws Exception {<BR>&nbsp;&nbsp;&nbsp; 
+}<BR>&nbsp;&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp; @Test<BR>&nbsp;&nbsp;&nbsp; 
+public void testDivide() {<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+fail("Not yet implemented");<BR>&nbsp;&nbsp;&nbsp; }</P>
+<P>&nbsp;&nbsp;&nbsp; @Test<BR>&nbsp;&nbsp;&nbsp; public void testMultiple() 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fail("Not yet 
+implemented");<BR>&nbsp;&nbsp;&nbsp; }<BR>}</P>
+<P>&nbsp;&nbsp;&nbsp; 说明： 
+<BR>　　@BeforeClass标签注释的方法用于在整个类测试过程的初始化后调用一次，@AfterClass标签注释的方法则是整个测试类结束之前调用一次。这2个标签的搭配可以避免使用@Before、@After标签组合在每个测试方法前后都调用的弊端，减少系统开销，提高系统测试速度。(不过对环境独立性要求较高的测试还是应当使用@Before、@After来完成) 
+<BR>　　@Test标签用来标注待测试的方法，按照类中声明的顺序执行。</P>
+<P>　　我们在testDivide方法加入测试代码，分别测试三种情况： <BR>　　a. 完全正确也没有可能出错的数据，如：9除3 结果必须等于3 
+<BR>　　b. 可能有问题的边缘数据，如：10除3 结果也必须等于3 <BR>　　c. 错误的数据，如：10除0 必须抛出异常</P>
+<P>&nbsp;&nbsp;&nbsp; 忽略testMultiple方法</P>
+<P>&nbsp;&nbsp;&nbsp; 代码如下： <BR>Java代码 
+<BR>@Test(expected=ArithmeticException.class)&nbsp;&nbsp; <BR>public void 
+testDivide() {&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp; 
+assertEquals(3,Math.divide(9,3));&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp; 
+assertEquals(3,Math.divide(10,3));&nbsp;&nbsp; <BR>&nbsp;&nbsp;&nbsp; 
+Math.divide(10,0); //除数不能为0，会抛出异常&nbsp;&nbsp; <BR>}&nbsp;&nbsp; <BR>&nbsp; 
+<BR>@Ignore("忽略乘法测试")&nbsp;&nbsp; <BR>@Test&nbsp; <BR>public void testMultiple() 
+{&nbsp;&nbsp; <BR>}&nbsp;</P>
+<P>&nbsp;&nbsp;&nbsp; 
+@Test(expected=ArithmeticException.class)<BR>&nbsp;&nbsp;&nbsp; public void 
+testDivide() {<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+assertEquals(3,Math.divide(9,3));<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+assertEquals(3,Math.divide(10,3));<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+Math.divide(10,0); //除数不能为0，会抛出异常<BR>&nbsp;&nbsp;&nbsp; }<BR>&nbsp;&nbsp;&nbsp; 
+<BR>&nbsp;&nbsp;&nbsp; @Ignore("忽略乘法测试")<BR>&nbsp;&nbsp;&nbsp; 
+@Test<BR>&nbsp;&nbsp;&nbsp; public void testMultiple() {<BR>&nbsp;&nbsp;&nbsp; 
+}</P>
+<P>&nbsp;&nbsp;&nbsp; 说明: 
+<BR>　　Junit4为测试方法增加了判断异常的方式，避免了以前还要通过try/catch块捕捉异常再抛出的复杂方式，简单的这样声明<A 
+href="mailto:“@Test(expected=ArithmeticException.class)”Junit4">“@Test(expected=ArithmeticException.class)”Junit4</A>就会检查此方法是否抛出ArithmeticException异常，如果抛出则测试通过，没抛出则测试不通过（@Test标签还有一些其他参数，例如超时测试@Test(timeout=1)这样，但是由于并不能准确反应实际时间，所以应用较少，经过我测试误差太大绝对不适合拿来做超时测试的） 
+<BR>@Ignore标签会告诉Junit4忽略它所标注的方法，例如数据库不可用时可以用此标注标注一些测试数据库连接的方法来避免测试失败。</P>
+<P>&nbsp;&nbsp;&nbsp; 3) 运行测试 
+<BR>　　系统会打开JUnit透视图，如果测试全部通过，则显示颜色条为绿色；我们将assertEquals(3,Math.divide(9,3));改成assertEquals(2,Math.divide(9,3));则显示颜色条为红色，我们可以对错误或者故障的地方进行追踪。</P>
+<P>&nbsp;&nbsp;&nbsp; 4) 创建测试套件 
+<BR>　　测试套件可以将多个测试用例合在一起测试，将相关的测试用例合成一个测试套件，在做一个修改后，只需要运行测试套件就可以，不需要运行每一个测试用例。 
+<BR>　　Junit4没有采用以前的套件测试方法，同样使用annotation的方式来进行。简单在你所要构建测试套件的包里创建一个文件，一般以包名+4Suite 
+<BR>　　下面我在上面的测试包中复制一下之前的测试类并且一个改名字叫做MathTestAnother，新建一个class类叫做Uitl4Suite，代码如下： 
+<BR>Java代码 <BR>import org.junit.runner.RunWith;&nbsp;&nbsp; <BR>import 
+org.junit.runners.Suite;&nbsp;&nbsp; <BR>import 
+org.junit.runners.Suite.SuiteClasses;&nbsp;&nbsp; <BR>/**&nbsp; <BR>&nbsp;* 
+@author bulargy.j.bai&nbsp; <BR>&nbsp;* @创建时间：Mar 11, 2008&nbsp; <BR>&nbsp;* 
+@描述：util包的测试套件&nbsp; <BR>&nbsp;*/&nbsp; <BR>@RunWith(Suite.class)&nbsp;&nbsp; 
+<BR>@SuiteClasses({MathTest.class,&nbsp;&nbsp; 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+MathTestAnother.class})&nbsp;&nbsp; <BR>public class Util4Suite {&nbsp;&nbsp; 
+<BR>}&nbsp;</P>
+<P>import org.junit.runner.RunWith;<BR>import org.junit.runners.Suite;<BR>import 
+org.junit.runners.Suite.SuiteClasses;<BR>/**<BR>&nbsp;* @author 
+bulargy.j.bai<BR>&nbsp;* @创建时间：Mar 11, 2008<BR>&nbsp;* 
+@描述：util包的测试套件<BR>&nbsp;*/<BR>@RunWith(Suite.class)<BR>@SuiteClasses({MathTest.class,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+MathTestAnother.class})<BR>public class Util4Suite {<BR>}</P>
+<P>&nbsp;&nbsp;&nbsp; 说明： 
+<BR>　　通过@RunWith和@SuiteClasses标签来注释一个空的包含无参数构造函数的类来作为套件类，将需要组成套件运行的类加到@SuiteClasses的属性中即可。</P>
+<P>　　可以看到运行套件类的结果是2个测试类都进行了测试。</P></DIV><!--相关rss--><!-- 相关keyword -->
+<DIV class=w638><B>相关关键词</B> <A title=Junit4 
+href="http://sou.it168.com/asearch.aspx?keyword=Junit4" target=_blank>Junit4</A> 
+<A title=单元测试 href="http://sou.it168.com/asearch.aspx?keyword=单元测试" 
+target=_blank>单元测试</A> </DIV>
+<DIV class="w_c2 top12">
+<DIV class="l2 r" style="FLOAT: right"><A 
+href="http://tech.it168.com/a2008/1230/261/000000261646.shtml"><IMG height=23 
+alt="" src="Junit4测试.files/new_54.gif" width=63 align=absMiddle></A> <SPAN 
+class=f14><B><A title="建立Math类 " 
+href="http://tech.it168.com/a2008/1230/261/000000261646.shtml">1</A></B> <A 
+title=参数测试 
+href="http://tech.it168.com/a2008/1230/261/000000261646_1.shtml">2</A> </SPAN><A 
+href="http://tech.it168.com/a2008/1230/261/000000261646_1.shtml"><IMG height=23 
+alt="" src="Junit4测试.files/new_56.gif" width=63 align=absMiddle></A> 
+</DIV></DIV>
+<DIV class=contdh>
+<DIV class=c2>【内容导航】 
+<TABLE>
+  <TBODY>
+  <TR>
+    <TD>第1页：<B><A title="建立Math类 " 
+      href="http://tech.it168.com/a2008/1230/261/000000261646.shtml"> 建立Math类 
+      </A></B></TD>
+    <TD>第2页：<A title=参数测试 
+      href="http://tech.it168.com/a2008/1230/261/000000261646_1.shtml"> 参数测试 
+    </A></TD></TR></TBODY></TABLE></DIV></DIV>
+<DIV class="w_c2 top12">
+<DIV class=l2>&copy;版权所有。未经许可，不得转载。</DIV>
+<DIV class="r2 r">[责任编辑：<B class=bl>李倩</B>] </DIV></DIV><!-- 网友点评 -->
+<DIV id=iframetd1><IFRAME id=myiframe1 border=0 align=center marginWidth=0 
+marginHeight=0 src="Junit4测试.files/2009304_tech.htm" frameBorder=no noResize 
+width="100%" scrolling=no height=100></IFRAME></DIV>
+<SCRIPT type=text/javascript>
+var iframe = document.getElementById("myiframe1");
+if (reqUrl.lastIndexOf("itpub.net")>0) 
+iframe.src = 'http://pinglun.itpub.net/space_pinglun/Article_new.asp?channel=tech&cDoc_id=000000000261646&cTitle=Junit4测试';
+else
+iframe.src = 'http://pinglun.it168.com/space_pinglun/Article_new.asp?channel=tech&cDoc_id=000000000261646&cTitle=Junit4测试';
+function reinitIframe(){
+var iframe = document.getElementById("myiframe1");
+try{
+var bHeight = iframe.contentWindow.document.body.scrollHeight;
+var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+var height = Math.max(bHeight, dHeight);
+iframe.height =  height;
+}catch (ex){}
+}
+window.setInterval("reinitIframe()", 200);
+</SCRIPT>
+<!--ADV|底通栏-->
+<DIV id=ADV_DTL>
+<DIV class=divad_clear></DIV></DIV><!--ADV|底通栏-->
+<DIV class=bai><!-- 相关文章 -->
+<DIV class=pl>相关文章 </DIV>
+<DIV class=li>
+<UL>
+  <LI><A title=浅谈单元测试 
+  href="http://tech.it168.com/oldarticle/2006-07-26/200607261458063.shtml" 
+  target=_blank>浅谈单元测试</A> </LI>
+  <LI><A title="怎样使用Junit Framework进行单元测试的编写" 
+  href="http://tech.it168.com/oldarticle/2007-06-11/200706111004718.shtml" 
+  target=_blank>怎样使用Junit Framework进行单元测试的编写</A> </LI>
+  <LI><A title=JBuilder单元测试实例 
+  href="http://tech.it168.com/oldarticle/2007-06-11/200706111316421.shtml" 
+  target=_blank>JBuilder单元测试实例</A> </LI>
+  <LI><A title=为Asp.net控件写单元测试(ViewState) 
+  href="http://tech.it168.com/oldarticle/2007-06-13/200706131454781.shtml" 
+  target=_blank>为Asp.net控件写单元测试(ViewState)</A> </LI>
+  <LI><A title=深入浅出单元测试 
+  href="http://tech.it168.com/oldarticle/2007-06-14/200706141916656.shtml" 
+  target=_blank>深入浅出单元测试</A> </LI>
+  <LI><A title=JUnit和单元测试入门简介 
+  href="http://tech.it168.com/oldarticle/2007-06-14/200706142152640.shtml" 
+  target=_blank>JUnit和单元测试入门简介</A> </LI>
+  <LI><A title="TestNG 使 Java 单元测试轻而易举" 
+  href="http://tech.it168.com/oldarticle/2007-06-18/200706181500406.shtml" 
+  target=_blank>TestNG 使 Java 单元测试轻而易举</A> </LI></UL></DIV><!--相关产品--><!-- 相关论坛贴 -->
+<DIV class=top12></DIV>
+<DIV class=pl><SPAN><A href="http://www.itpub.net/" 
+target=_blank>进入论坛&gt;&gt;</A></SPAN>相关论坛贴</DIV>
+<DIV class=li>
+<UL>
+  <LI><A title=求供货商行项目明细的相关BAPI 
+  href="http://www.itpub.net/thread-1016639-1-1.html" 
+  target=_blank>求供货商行项目明细的相关BAPI</A> </LI>
+  <LI><A title=如何將兩個PARAMETERS放在一行? 
+  href="http://www.itpub.net/thread-1016619-1-1.html" 
+  target=_blank>如何將兩個PARAMETERS放在一行?</A> </LI>
+  <LI><A title="问个简单的问题，account type有什么控制作用？" 
+  href="http://www.itpub.net/thread-1016611-1-1.html" 
+  target=_blank>问个简单的问题，account type有什么控制作用？</A> </LI>
+  <LI><A title="abap中select 怎麼取SY-DATUM的年月" 
+  href="http://www.itpub.net/thread-1016491-1-1.html" target=_blank>abap中select 
+  怎麼取SY-DATUM的年月</A> </LI>
+  <LI><A title=大家来列举一下查找同一内表中重复记录的最优化的算法 
+  href="http://www.itpub.net/thread-1016353-1-1.html" 
+  target=_blank>大家来列举一下查找同一内表中重复记录的最优化...</A> </LI>
+  <LI><A title=如何控制已开发票不能跨两个月或以上进行冲销 
+  href="http://www.itpub.net/thread-1016327-1-1.html" 
+  target=_blank>如何控制已开发票不能跨两个月或以上进行冲销</A> </LI></UL></DIV></DIV></DIV></DIV>
+<DIV class=r1><!--ADV|画中画-->
+<DIV id=ADV_HZH>
+<DIV class=divad_clear></DIV></DIV><!--ADV|画中画-->
+<DIV class=tj>
+<DIV class=l3>专题推荐</DIV>
+<DIV class=r3>·<A title="【高端访谈】寻找下一代CTO向冠军冲刺 " 
+href="http://tech.it168.com/focus/200902/cto090227/index.html" 
+target=_blank>【高端访谈】寻找下一代CTO向冠军冲刺 </A><BR>·<A 
+title="【技术专题】SQL Server 2008数据挖掘指南 " 
+href="http://tech.it168.com/focus/200902/sql2008wajue/index.html" 
+target=_blank>【技术专题】SQL Server 2008数据挖掘指南 </A><BR>·<A title=【高端访谈】畅谈“寻找下一代CTO” 
+href="http://tech.it168.com/focus/200901/ctohelendu/index.html" 
+target=_blank>【高端访谈】畅谈“寻找下一代CTO”</A><BR>·<A title=【热点专题】08年.NET最受欢迎的图书 
+href="http://tech.it168.com/focus/200902/net2008/index.html" 
+target=_blank>【热点专题】08年.NET最受欢迎的图书</A><BR>·<A title="【有问必答】sql sever 2008性能优化" 
+href="http://tech.it168.com/focus/200901/sql3/index.html" 
+target=_blank>【有问必答】sql sever 2008性能优化</A><BR>·<A title="【高峰论坛】RSDC 2008召集令" 
+href="http://focus.it168.com/200807/IBMRSDC/index.html" target=_blank>【高峰论坛】RSDC 
+2008召集令</A><BR>·<A title=【技术沙龙】OCP认证考试分享 
+href="http://tech.it168.com/zt/oracleocp/index.html" 
+target=_blank>【技术沙龙】OCP认证考试分享</A><BR>·<A title=【技术专题】测试用例设计之道 
+href="http://focus.it168.com/200807/testcase/index.html" 
+target=_blank>【技术专题】测试用例设计之道</A><BR></DIV></DIV><!--ADV|立柱1-->
+<DIV id=ADV_LZ1>
+<DIV class=divad_clear></DIV></DIV><!--ADV|立柱1--><!-- 热点文章排行 -->
+<DIV class=top8></DIV>
+<DIV class=p2>
+<DIV class=p2t>热点文章排行</DIV>
+<UL>
+  <LI class=li001><A title="Oracle RAC入门和提高" 
+  href="http://tech.it168.com/a2009/0325/269/000000269555.shtml" 
+  target=_blank>Oracle RAC入门和提高</A> </LI>
+  <LI class=li002><A title=IBM吞Sun：悲伤的程序员 
+  href="http://tech.it168.com/a2009/0326/269/000000269688.shtml" 
+  target=_blank>IBM吞Sun：悲伤的程序员</A> </LI>
+  <LI class=li003><A title=2008年度软件测试工具英雄榜 
+  href="http://tech.it168.com/a2009/0222/266/000000266317.shtml" 
+  target=_blank>2008年度软件测试工具英雄榜</A> </LI>
+  <LI class=li004><A title=IT业未来做什么最赚钱？ 
+  href="http://tech.it168.com/a2009/0325/269/000000269542.shtml" 
+  target=_blank>IT业未来做什么最赚钱？</A> </LI>
+  <LI class=li005><A title="Java 多线程与并发编程总结" 
+  href="http://tech.it168.com/a2009/0219/266/000000266059.shtml" 
+  target=_blank>Java 多线程与并发编程总结</A> </LI>
+  <LI class=li006><A title=50个实用的JavaScript工具 
+  href="http://tech.it168.com/a2009/0223/266/000000266361.shtml" 
+  target=_blank>50个实用的JavaScript工具</A> </LI>
+  <LI class=li007><A title=Linux开发环境必备十大开发工具 
+  href="http://tech.it168.com/a2009/0325/269/000000269621.shtml" 
+  target=_blank>Linux开发环境必备十大开发工具</A> </LI>
+  <LI class=li008><A title=IE8正式版下载地址 
+  href="http://tech.it168.com/a2009/0320/269/000000269139.shtml" 
+  target=_blank>IE8正式版下载地址</A> </LI>
+  <LI class=li009><A title=程序员的十层楼 
+  href="http://tech.it168.com/a2009/0211/265/000000265085.shtml" 
+  target=_blank>程序员的十层楼</A> </LI>
+  <LI class=li010><A title=VIA和Intel同时进军Android上网本 
+  href="http://tech.it168.com/a2009/0325/269/000000269597.shtml" 
+  target=_blank>VIA和Intel同时进军Android上网本</A> </LI></UL></DIV><!--ADV|立柱2-->
+<DIV id=ADV_LZ2>
+<DIV class=divad_clear></DIV></DIV><!--ADV|立柱2--><!--ADV|供应商-->
+<DIV id=ADV_GYS>
+<DIV class=divad_clear></DIV></DIV><!--ADV|供应商--><!--ADV|立柱3-->
+<DIV id=ADV_LZ3>
+<DIV class=divad_clear></DIV></DIV><!--ADV|立柱3--><!-- 近期热评文章 -->
+<DIV class=top8></DIV>
+<DIV class=p2>
+<DIV class=p2t>近期热评文章</DIV>
+<DIV class=l1i>
+<UL>
+  <LI><A title="在Visual Studio 2010中实现灾难恢复" 
+  href="http://tech.it168.com/a2009/0310/268/000000268004.shtml" 
+  target=_blank>在Visual Studio 2010中实现</A> </LI>
+  <LI><A title=ASP.NET性能提升之浏览器缓存的调用 
+  href="http://tech.it168.com/a2009/0309/267/000000267881.shtml" 
+  target=_blank>ASP.NET性能提升之浏览器缓存的调用</A> </LI>
+  <LI><A title=程序员的十层楼 
+  href="http://tech.it168.com/a2009/0211/265/000000265085_2.shtml" 
+  target=_blank>程序员的十层楼</A> </LI>
+  <LI><A title=浅议企业内部IT与云平台的协同 
+  href="http://tech.it168.com/a2009/0313/268/000000268408.shtml" 
+  target=_blank>浅议企业内部IT与云平台的协同</A> </LI>
+  <LI><A title="Windows 7生存之道:企业特性" 
+  href="http://tech.it168.com/a2009/0311/268/000000268124.shtml" 
+  target=_blank>Windows 7生存之道:企业特性</A> </LI>
+  <LI><A title=微软云端进化论：适者生存 
+  href="http://publish.itpub.net/a2009/0316/268/000000268629.shtml" 
+  target=_blank>微软云端进化论：适者生存</A> </LI>
+  <LI><A title="Windows 7能否在2009年众望所归？" 
+  href="http://publish.itpub.net/a2008/1223/260/000000260963.shtml" 
+  target=_blank>Windows 7能否在2009年众望所归？</A> </LI>
+  <LI><A title=Asp.Net中动态页面转静态页面 
+  href="http://tech.it168.com/a2009/0303/267/000000267447.shtml" 
+  target=_blank>Asp.Net中动态页面转静态页面</A> </LI>
+  <LI><A title=Linux开发环境必备十大开发工具 
+  href="http://tech.it168.com/a2009/0325/269/000000269621_1.shtml" 
+  target=_blank>Linux开发环境必备十大开发工具</A> </LI>
+  <LI><A title=gridview导出Excel表 
+  href="http://tech.it168.com/d/2008-07-08/200807081216469.shtml" 
+  target=_blank>gridview导出Excel表</A> </LI></UL></DIV></DIV><!-- 下载服务器类 -->
+<DIV class=top8></DIV>
+<DIV class=p2>
+<DIV class=p2t>编程开发下载月排行top10</DIV>
+<UL>
+  <LI class=li001><A title="九天自助建站系统 V6.8SQL标准多用户版（无时间限制）含435套模板" 
+  href="http://download.it168.com/248/269/41053/index.shtml" 
+  target=_blank>九天自助建站系统 V6.8SQL标准多用户版（无时..</A> </LI>
+  <LI class=li002><A title="TurboC/C++forWindows集成实验与学习环境 V2007" 
+  href="http://download.it168.com/248/258/40570/index.shtml" 
+  target=_blank>TurboC/C++forWindows集成实验与学习环境 V2..</A> </LI>
+  <LI class=li003><A title="豪华网络商城购物网站管理系统破解版 V2008" 
+  href="http://download.it168.com/248/269/41069/index.shtml" 
+  target=_blank>豪华网络商城购物网站管理系统破解版 V2008</A> </LI>
+  <LI class=li004><A title="小颖JAVA源代码反编译超级引挚 V1.4 标准版" 
+  href="http://download.it168.com/248/258/39744/index.shtml" 
+  target=_blank>小颖JAVA源代码反编译超级引挚 V1.4 标准版</A> </LI>
+  <LI class=li005><A title="学校网站全站源码正式下载版 V2008" 
+  href="http://download.it168.com/248/269/41202/index.shtml" 
+  target=_blank>学校网站全站源码正式下载版 V2008</A> </LI>
+  <LI class=li006><A title="TurboC V2.0 Build0703 汉化版" 
+  href="http://download.it168.com/248/262/40009/index.shtml" 
+  target=_blank>TurboC V2.0 Build0703 汉化版</A> </LI>
+  <LI class=li007><A title="网趣网上购物系统 V7.5 时尚版" 
+  href="http://download.it168.com/248/269/40885/index.shtml" 
+  target=_blank>网趣网上购物系统 V7.5 时尚版</A> </LI>
+  <LI class=li008><A title="流程图制作工具 V1.2" 
+  href="http://download.it168.com/248/262/40505/index.shtml" 
+  target=_blank>流程图制作工具 V1.2</A> </LI>
+  <LI class=li009><A title=Access数据库密码破解 
+  href="http://download.it168.com/248/266/40410/index.shtml" 
+  target=_blank>Access数据库密码破解</A> </LI>
+  <LI class=li010><A title="动软.Net代码生成器 V2.18" 
+  href="http://download.it168.com/248/262/40763/index.shtml" 
+  target=_blank>动软.Net代码生成器 V2.18</A> </LI></UL></DIV><!-- 下载备份还原 -->
+<DIV class=top8></DIV>
+<DIV class=p2>
+<DIV class=p2t>Linux软件下载月排行top10</DIV>
+<UL>
+  <LI class=li001><A title="GRUB for DOS" 
+  href="http://download.it168.com/356/366/67659/index.shtml" target=_blank>GRUB 
+  for DOS</A> </LI>
+  <LI class=li002><A title="wingrub V0.2 build 6 for Linux" 
+  href="http://download.it168.com/356/366/67651/index.shtml" 
+  target=_blank>wingrub V0.2 build 6 for Linux</A> </LI>
+  <LI class=li003><A title="Mac下的PhotoShop The GIMP V2.4.6" 
+  href="http://download.it168.com/356/368/67539/index.shtml" 
+  target=_blank>Mac下的PhotoShop The GIMP V2.4.6</A> </LI>
+  <LI class=li004><A title="The GIMP V2.6.1 Linux下的PhotoShop" 
+  href="http://download.it168.com/356/367/107442/index.shtml" target=_blank>The 
+  GIMP V2.6.1 Linux下的PhotoShop</A> </LI>
+  <LI class=li005><A title="The GIMP V2.60" 
+  href="http://download.it168.com/356/367/67885/index.shtml" target=_blank>The 
+  GIMP V2.60</A> </LI>
+  <LI class=li006><A title="LumaQQ for iPhone/iPod Touch 200804262300 简体中文免费版" 
+  href="http://download.it168.com/356/365/67881/index.shtml" 
+  target=_blank>LumaQQ for iPhone/iPod Touch 200804262300..</A> </LI>
+  <LI class=li007><A title="红旗Linux桌面 V6.0 工具盘镜像" 
+  href="http://download.it168.com/356/366/67879/index.shtml" 
+  target=_blank>红旗Linux桌面 V6.0 工具盘镜像</A> </LI>
+  <LI class=li008><A title="Linux下的解码器包集合 20050412" 
+  href="http://download.it168.com/356/368/67818/index.shtml" 
+  target=_blank>Linux下的解码器包集合 20050412</A> </LI>
+  <LI class=li009><A title="Windows模拟器：Wine V1.1.6 Final" 
+  href="http://download.it168.com/356/366/107441/index.shtml" 
+  target=_blank>Windows模拟器：Wine V1.1.6 Final</A> </LI>
+  <LI class=li010><A title="Linux Kernel V2.6.27-rc" 
+  href="http://download.it168.com/356/361/107440/index.shtml" 
+  target=_blank>Linux Kernel V2.6.27-rc</A> </LI></UL></DIV><!--ADV|立柱4-->
+<DIV id=ADV_LZ4>
+<DIV class=divad_clear></DIV></DIV><!--ADV|立柱4--><!--ADV|立柱5-->
+<DIV id=ADV_LZ5>
+<DIV class=divad_clear></DIV></DIV><!--ADV|立柱5--></DIV></DIV><!-- 内容结束 -->
+<DIV class=line1></DIV>
+<DIV class=clear></DIV>
+<DIV id=footer><A href="http://www.bj.cyberpolice.cn/alarm/alarm.htm" 
+target=_blank><IMG class=border1 height=47 src="Junit4测试.files/police.jpg" 
+width=118 border=0></A> 
+<P class=link><A href="http://www.it168.com/bottomfile/gyhc.shtml" 
+target=_blank>关于皓辰</A> | <A href="http://www.it168.com/bottomfile/gy168.shtml" 
+target=_blank>关于IT168</A> | <A href="http://www.it168.com/bottomfile/hzhb.shtml" 
+target=_blank>合作伙伴</A> | <A href="http://www.it168.com/bottomfile/ggfw.shtml" 
+target=_blank>广告服务</A> | <A href="http://www.it168.com/bottomfile/sytk.shtml" 
+target=_blank>使用条款</A> | <A href="http://www.it168.com/bottomfile/tgzn.shtml" 
+target=_blank>投稿指南</A> | <A href="http://hr.it168.com/" target=_blank>诚聘精英</A> | 
+<A href="http://www.it168.com/bottomfile/lxwm.shtml" target=_blank>联系我们</A> | <A 
+href="http://www.it168.com//bottomfile/flgw/fl.htm" target=_blank>法律顾问</A> | <A 
+href="http://www.it168.com/bottomfile/sitemap/sitemap.html" 
+target=_blank>网站地图</A> | <A 
+href="http://big5.it168.com:82/gate/big5/www.it168.com/" target=_blank>繁体版</A> 
+</P>
+<P class=copytxt>CopyRight 1999-2009 www.it168.com All Right Reserved. 
+北京皓辰网域网络信息技术有限公司. 版权所有 京ICP证:060528号</P>
+<DIV class=clear></DIV></DIV>
+<SCRIPT src="Junit4测试.files/ycncommon.js" type=text/javascript></SCRIPT>
+
+<SCRIPT src="Junit4测试.files/ycnevent.js" type=text/javascript></SCRIPT>
+
+<SCRIPT src="Junit4测试.files/nav.js" type=text/javascript></SCRIPT>
+
+<SCRIPT src="Junit4测试.files/resize.js" type=text/javascript></SCRIPT>
+
+<SCRIPT type=text/javascript>init_Nav();</SCRIPT>
+
+<SCRIPT src="Junit4测试.files/chkFrom.asp" type=text/javascript></SCRIPT>
+
+<SCRIPT type=text/javascript>
+//firsturl=document.referrer;
+//firsturl="ublish.itpub.net/";
+//var objxx=document.getElementById("revurl");
+//objxx.value=firsturl;
+
+//暂时广告添加
+//document.getElementById('ADV_HZH').innerHTML="<embed src='http://adshow.it168.com/newImage/20090410/56360_175836.swf' pluginspage=http://www.macromedia.com/shockwave/download/ type=application/x-shockwave-flash  wmode='transparent' width=300 height=250></embed>"
+
+document.getElementById('ADV_LZ1').innerHTML="<div id=56043><div style='position:absolute; z-index:2; width:300; height: 120'><a href='http://adshow.it168.com/manager/files/icount.asp?cid=56043&cUrl=http://altfarm.mediaplex.com/ad/ck/10592-62013-23403-19' target=_blank><img border=0 width=300 height=120  src='http://adshow.it168.com/newImage/23.gif'></a></div><OBJECT classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' codebase='http://active.macromedia.com/flash2/cabs/swflash.cab#version=4,0,0,0' WIDTH=300 HEIGHT=120> <PARAM NAME=movie VALUE='http://adshow.it168.com/newImage/20090410/56043_112642.swf'> <PARAM NAME=quality VALUE=high> <PARAM NAME=wmode VALUE=transparent>  <EMBED src='http://adshow.it168.com/newImage/20090410/56043_112642.swf' TYPE='application/x-shockwave-flash'  PLUGINSPAGE='http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwavFlash' wmode='transparent'  WIDTH=300 HEIGHT=120></EMBED></OBJECT></div>"
+
+//document.getElementById('ADV_DTL').innerHTML="<IFRAME MARGINHEIGHT=0 MARGINWIDTH=0 FRAMEBORDER=0 WIDTH=670 HEIGHT=120  SCROLLING=NO SRC=http://adshow.it168.com/corpImage/Dell/2007030/1024/tech.htm></IFRAME>"
+
+document.getElementById('ADV_LZ2').innerHTML="<div id=56441><div style='position:absolute; z-index:2; width:300; height: 120'><a href='http://adshow.it168.com/manager/files/icount.asp?cid=56441&cUrl=http://altfarm.mediaplex.com/ad/ck/11267-73939-23403-3' target=_blank><img border=0 width=300 height=120  src='http://adshow.it168.com/newImage/23.gif'></a></div><OBJECT classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' codebase='http://active.macromedia.com/flash2/cabs/swflash.cab#version=4,0,0,0' WIDTH=300 HEIGHT=120> <PARAM NAME=movie VALUE='http://adshow.it168.com/newImage/20090408/ad_101859.swf'> <PARAM NAME=quality VALUE=high> <PARAM NAME=wmode VALUE=transparent>  <EMBED src='http://adshow.it168.com/newImage/20090408/ad_101859.swf' TYPE='application/x-shockwave-flash'  PLUGINSPAGE='http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwavFlash' wmode='transparent'  WIDTH=300 HEIGHT=120></EMBED></OBJECT></div>"
+
+//document.getElementById('ADV_LZ3').innerHTML="<embed src='http://adshow.it168.com/newImage/20090209/ad_10414.swf' pluginspage=http://www.macromedia.com/shockwave/download/ type=application/x-shockwave-flash  wmode='transparent' width=300 height=250></embed>"
+
+//document.getElementById('ADV_LZ4').innerHTML="<table border='0' cellspacing='0' cellpadding='0'><tr><td><a href='http://adshow.it168.com/manager/files/icount.asp?cid=47907&cUrl=http://ad.cn.doubleclick.net/clk;205701376;28352587;k?http://www.dell.com.cn/virtual' target=_blank><img src='http://adshow.it168.com/newImage/20080714/ad_104210.jpg' border=0 width=300 height=240></a></td></tr></table>"
+try{
+//document.getElementById('ADV_BTTL').innerHTML="<embed src='http://adshow.it168.com/newImage/20081230/ad_145358.swf' pluginspage=http://www.macromedia.com/shockwave/download/ type=application/x-shockwave-flash  wmode='transparent' width=670 height=120></embed>"
+}catch(ex){}
+document.getElementById('ADV_TL').innerHTML="<IFRAME MARGINHEIGHT=0 MARGINWIDTH=0 FRAMEBORDER=0 WIDTH=980 HEIGHT=90  SCROLLING=NO SRC='http://adshow.it168.com/corpImage/novell/2009304/2009304_tech.html'></IFRAME>"
+</SCRIPT>
+
+<SCRIPT language=javascript>
+var icast_channel_ID = 1525;
+document.write('<scr'+'ipt language=javascript src="http://js.icast.cn/a/4/7/8/3/2/1525.js"></scr'+'ipt>');
+</SCRIPT>
+
+<SCRIPT language=javascript src="Junit4测试.files/pv.js"></SCRIPT>
+
+<SCRIPT>
+function sendPV(){
+    var pvTrack = new PvTrack();
+    pvTrack.type = 11; // 频道类别ID
+    pvTrack.channel =24; // 频道ID
+    pvTrack.pageType = 0;
+    pvTrack.track();
+}
+window.setTimeout("sendPV()", 3);
+</SCRIPT>
+<!-- START WRating v1.0 -->
+<SCRIPT src="Junit4测试.files/a1.js" type=text/javascript>
+</SCRIPT>
+
+<SCRIPT type=text/javascript>
+var vjAcc="860010-2083110200";
+var wrUrl="http://it168.wrating.com/";
+vjTrack("");
+</SCRIPT>
+<NOSCRIPT><IMG height=1 src="Junit4测试.files/a.gif" width=1></NOSCRIPT> <!-- END WRating v1.0 --></BODY></HTML>

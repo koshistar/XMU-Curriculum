@@ -1,0 +1,33 @@
+package BookExample;
+
+import junit.framework.TestCase;
+
+public class BranchTest extends TestCase {
+	private int A1,A2,A3,A4,B1,B2,B3,B4,X1,X2,X3,X4,R1,R2,R3,R4;
+	private BookExample be;
+
+	protected void setUp() throws Exception {
+		super.setUp();
+		A1=2;B1=0;X1=3;R1=2;
+		A2=1;B2=0;X2=1;R2=1;
+		A3=3;B3=0;X3=3;R3=1;
+		A4=2;B4=1;X4=2;R4=3;
+		be=new BookExample();
+		
+	}
+
+	protected void tearDown() throws Exception {
+		super.tearDown();
+	}
+
+	public void testComputeX1() {
+		assertEquals(R1,be.ComputeX(A1, B1, X1));
+		assertEquals(R2,be.ComputeX(A2, B2, X2));
+	}
+	
+	public void testComputeX2() {
+		assertEquals(R3,be.ComputeX(A3, B3, X3));
+		assertEquals(R4,be.ComputeX(A4, B4, X4));
+	}
+
+}
