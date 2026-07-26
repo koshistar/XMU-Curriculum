@@ -1,0 +1,2 @@
+1
+result.dat error.log data.txt weights_init.dat weights_final.dat 66 5000 9 5 1 0.15 0.075
